@@ -18,7 +18,7 @@ Seringkali, kita menyangka bahwa belajar maraton selama 3-4 jam tanpa istirahat 
 
 Inilah mengapa Teknik Pomodoro menjadi salah satu senjata andalan siswa berprestasi di seluruh dunia.
 
-#### 🍅 Apa Itu Teknik Pomodoro?
+#### Apa Itu Teknik Pomodoro?
 
 Teknik Pomodoro adalah metode manajemen waktu yang dikembangkan oleh Francesco Cirillo di akhir tahun 1980-an. Nama "Pomodoro" diambil dari *timer* dapur berbentuk tomat yang ia gunakan.
 

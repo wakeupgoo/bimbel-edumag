@@ -2,19 +2,19 @@
 
 backend:
   name: github
-  repo: wakeupgoo/bimbel-edumag # <--- WAJIB GANTI SESUAI REPO ANDA
+  repo: wakeupgoo/bimbel-edumag # <--- WAJIB GANTI (Nama Anda/bimbel-edumag)
   branch: main 
-  # Vercel tidak butuh base_url/auth_endpoint jika kita pakai GitHub App
 
 publish_mode: editorial_workflow
 
+# PATH: Jalur harus absolut dari root repository
 media_folder: "public/assets/img/uploads"
 public_folder: "/assets/img/uploads" 
 
 collections:
   - name: "article"
     label: "Artikel Blog"
-    folder: "public/_articles"
+    folder: "public/_articles" # <--- Pastikan folder ini ada di Vercel/GitHub
     create: true
     identifier_field: title
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
