@@ -2,9 +2,8 @@ backend:
   name: github
   repo: wakeupgoo/bimbel-edumag
   branch: main
-  # JANGAN gunakan github-os-auth lagi. Gunakan domain Anda sendiri:
-  base_url: https://bimbeledumag.my.id 
-  auth_endpoint: /api/auth
+  base_url: https://bimbeledumag.my.id
+  auth_endpoint: api/auth # Menghapus slash depan seringkali lebih stabil untuk Vercel functions
   
 publish_mode: editorial_workflow
 
@@ -14,7 +13,7 @@ public_folder: "/assets/img/uploads"
 collections:
   - name: "article"
     label: "Artikel Blog"
-    folder: "public/_articles" # Folder sesuai struktur Anda
+    folder: "public/_articles"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
