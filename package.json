@@ -1,8 +1,7 @@
-{
+﻿{
   "name": "bimbel-edumag",
   "version": "1.0.0",
-  "description": "CMS Backend",
   "dependencies": {
-    "node-fetch": "^3.0.0"
+    "node-fetch": "^2.6.7"
   }
 }
