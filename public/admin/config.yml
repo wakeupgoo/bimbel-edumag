@@ -2,9 +2,10 @@ backend:
   name: github
   repo: wakeupgoo/bimbel-edumag
   branch: main
-  base_url: https://bimbeledumag.my.id # Pastikan ini domain baru Anda
+  # JANGAN gunakan github-os-auth lagi. Gunakan domain Anda sendiri:
+  base_url: https://bimbeledumag.my.id 
   auth_endpoint: /api/auth
-
+  
 publish_mode: editorial_workflow
 
 media_folder: "public/assets/img/uploads"
