@@ -1,6 +1,10 @@
+# public/admin/config.yml
+
 backend:
-  name: git-gateway
+  name: github
+  repo: wakeupgoo/bimbel-edumag # <--- WAJIB GANTI SESUAI REPO ANDA
   branch: main 
+  # Vercel tidak butuh base_url/auth_endpoint jika kita pakai GitHub App
 
 publish_mode: editorial_workflow
 
@@ -21,6 +25,6 @@ collections:
       - {label: "2. Kategori", name: "category", widget: "select", options: ["Tips Belajar", "Persiapan Ujian", "Motivasi"], required: true}
       - {label: "3. Waktu Baca (Menit)", name: "readTime", widget: "number", min: 1, max: 20, required: true}
       - {label: "4. Ringkasan (Excerpt)", name: "excerpt", widget: "text", hint: "Maksimal 160 karakter untuk SEO Meta Description.", required: true}
-      - {label: "5. Gambar Utama (Hero)", name: "image", widget: "image", required: true}
+      - {label: "5. Gambar Utama (Thumbnail)", name: "thumbnail", widget: "image", required: true}
       - {label: "6. Caption Gambar", name: "caption", widget: "string"}
       - {label: "7. Isi Konten", name: "body", widget: "markdown", required: true}
