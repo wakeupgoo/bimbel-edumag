@@ -1,11 +1,10 @@
 backend:
   name: github
-  repo: wakeupgoo/bimbel-edumag # Sesuai repo Anda
+  repo: wakeupgoo/bimbel-edumag
   branch: main
-  # Menggunakan proxy alternatif yang lebih stabil
-  base_url: https://decap-cms-oauth-gateway.vercel.app
-  auth_endpoint: api/auth
-  
+  base_url: https://bimbeledumag.my.id # Pastikan ini domain baru Anda
+  auth_endpoint: /api/auth
+
 publish_mode: editorial_workflow
 
 media_folder: "public/assets/img/uploads"
