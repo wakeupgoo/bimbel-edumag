@@ -1,10 +1,8 @@
 {
   "name": "bimbel-edumag",
   "version": "1.0.0",
-  "scripts": {
-    "start": "serve public"
-  },
+  "description": "CMS Backend",
   "dependencies": {
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^3.0.0"
   }
 }
