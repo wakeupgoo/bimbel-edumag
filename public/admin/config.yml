@@ -3,12 +3,12 @@ backend:
   repo: wakeupgoo/bimbel-edumag
   branch: main
   base_url: https://bimbeledumag.my.id
-  auth_endpoint: api/auth # Menghapus slash depan seringkali lebih stabil untuk Vercel functions
-  
+  auth_endpoint: api/auth
+
 publish_mode: editorial_workflow
 
 media_folder: "public/assets/img/uploads"
-public_folder: "/assets/img/uploads" 
+public_folder: "/assets/img/uploads"
 
 collections:
   - name: "article"
