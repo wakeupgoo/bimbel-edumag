@@ -1,0 +1,26 @@
+backend:
+  name: git-gateway
+  branch: main 
+
+publish_mode: editorial_workflow
+
+media_folder: "public/assets/img/uploads"
+public_folder: "/assets/img/uploads" 
+
+collections:
+  - name: "article"
+    label: "Artikel Blog"
+    folder: "public/_articles"
+    create: true
+    identifier_field: title
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    
+    fields:
+      - {label: "Layout", name: "layout", widget: "hidden", default: "article-detail"}
+      - {label: "1. Judul Artikel", name: "title", widget: "string", required: true}
+      - {label: "2. Kategori", name: "category", widget: "select", options: ["Tips Belajar", "Persiapan Ujian", "Motivasi"], required: true}
+      - {label: "3. Waktu Baca (Menit)", name: "readTime", widget: "number", min: 1, max: 20, required: true}
+      - {label: "4. Ringkasan (Excerpt)", name: "excerpt", widget: "text", hint: "Maksimal 160 karakter untuk SEO Meta Description.", required: true}
+      - {label: "5. Gambar Utama (Hero)", name: "image", widget: "image", required: true}
+      - {label: "6. Caption Gambar", name: "caption", widget: "string"}
+      - {label: "7. Isi Konten", name: "body", widget: "markdown", required: true}
