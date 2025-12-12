@@ -1,0 +1,10 @@
+{
+  "name": "bimbel-edumag",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "serve public"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
