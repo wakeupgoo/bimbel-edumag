@@ -1,11 +1,11 @@
 backend:
   name: github
-  repo: wakeupgoo/bimbel-edumag # Sesuai repo di gambar
+  repo: wakeupgoo/bimbel-edumag # Sesuai repo Anda
   branch: main
-  # Menggunakan proxy komunitas gratis agar tidak lari ke api.netlify.com
-  base_url: https://github-os-auth.vercel.app
-  auth_endpoint: /api/auth
-
+  # Menggunakan proxy alternatif yang lebih stabil
+  base_url: https://decap-cms-oauth-gateway.vercel.app
+  auth_endpoint: api/auth
+  
 publish_mode: editorial_workflow
 
 media_folder: "public/assets/img/uploads"
