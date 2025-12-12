@@ -4,14 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bimbel Edumag - Belajar Jadi Mudah & Menyenangkan</title>
-
-    <meta name="description"
-        content="Bimbel Edumag hadir sebagai partner belajar friendly bagi siswa SD hingga SMA di Kutai Barat.">
+    <title>Bimbel Edumag - Partner Belajar Terbaik</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
@@ -19,21 +16,18 @@
 </head>
 
 <body>
+
     <header class="navbar">
         <div class="container nav-wrap">
             <a href="#home" class="logo">
                 <img src="assets/img/image.png" alt="Edumag Logo" />
                 <div class="logo-text">
-                    <p class="logo-bimbel">Bimbel</p>
-                    <p class="logo-edumag">EduMag</p>
+                    <span class="logo-bimbel">Bimbel</span>
+                    <span class="logo-edumag">EduMag</span>
                 </div>
             </a>
 
-            <button class="nav-toggle" aria-label="Toggle navigation menu">
-                <span></span><span></span><span></span>
-            </button>
-
-            <nav class="nav-menu">
+            <nav class="nav-menu desktop-only">
                 <ul>
                     <li><a href="#home">Beranda</a></li>
                     <li><a href="#program">Program</a></li>
@@ -41,118 +35,100 @@
                     <li><a href="#konsultasi">Konsultasi</a></li>
                 </ul>
             </nav>
+
             <a class="cta-nav desktop-only" href="https://wa.me/6285134913931" target="_blank">Hubungi Kami</a>
         </div>
     </header>
 
     <section id="home" class="hero">
         <div class="container hero-grid">
-            <div class="hero-text reveal active">
-                <h1>Belajar Jadi Mudah & Menyenangkan</h1>
+            <div class="hero-text reveal">
+                <h1>Belajar Jadi <span class="highlight">Mudah</span> & Menyenangkan</h1>
                 <p>Ucapkan selamat tinggal pada belajar yang kaku! Bimbel Edumag hadir sebagai partner belajar yang
                     friendly bagi siswa SD hingga SMA.</p>
-                <a href="https://wa.me/6285134913931" class="cta-btn" target="_blank">Daftar Sekarang</a>
+                <div class="hero-btns">
+                    <a href="https://wa.me/6285134913931" class="cta-btn">Daftar Sekarang</a>
+                    <a href="#program" class="secondary-btn">Lihat Program</a>
+                </div>
             </div>
-            <div class="hero-illustration reveal active">
-                <img src="assets/img/Hero.jpg" alt="Ilustrasi Belajar Modern"
-                    style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" />
+            <div class="hero-img reveal">
+                <img src="assets/img/Hero.jpg" alt="Belajar Modern" />
             </div>
         </div>
     </section>
 
-    <section id="program" class="program" style="padding: 100px 0;">
+    <section id="program" class="section-padding">
         <div class="container">
-            <h2 class="section-title reveal">Program Edumag</h2>
-            <div id="article-list" class="program-grid">
+            <h2 class="section-title reveal">Program Unggulan</h2>
+            <div class="grid-3">
                 <div class="card reveal">
-                    <i class="fa-solid fa-user-tie fa-2xl" style="color: var(--primary-navy); margin-bottom: 20px;"></i>
+                    <div class="card-icon"><i class="fa-solid fa-user-graduate"></i></div>
                     <h3>Private Class</h3>
-                    <p>Fokus dan cepat berkembang dengan pendampingan personal satu guru satu siswa.</p>
+                    <p>Pendampingan intensif satu guru satu siswa untuk hasil maksimal.</p>
                 </div>
                 <div class="card reveal">
-                    <i class="fa-solid fa-users fa-2xl" style="color: var(--primary-navy); margin-bottom: 20px;"></i>
+                    <div class="card-icon"><i class="fa-solid fa-users"></i></div>
                     <h3>Reguler Class</h3>
-                    <p>Suasana aktif dan mendukung. Belajar bersama teman-teman jadi lebih seru.</p>
+                    <p>Belajar seru bersama teman dengan kurikulum yang up-to-date.</p>
                 </div>
                 <div class="card reveal">
-                    <i class="fa-solid fa-laptop-code fa-2xl"
-                        style="color: var(--primary-navy); margin-bottom: 20px;"></i>
+                    <div class="card-icon"><i class="fa-solid fa-laptop"></i></div>
                     <h3>Online Class</h3>
-                    <p>Fleksibel dan interaktif. Bisa belajar dari mana saja tanpa batas ruang.</p>
+                    <p>Akses belajar berkualitas dari mana saja secara interaktif.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="artikel" class="program" style="background: #fdfdfd; padding: 100px 0;">
+    <section id="artikel" class="section-padding bg-alt">
         <div class="container">
-            <h2 class="section-title reveal">Artikel & Tips Belajar</h2>
-            <div id="article-list" class="program-grid">
-                <p style="text-align: center; width: 100%;">Sedang mengambil inspirasi untukmu...</p>
+            <div class="section-header">
+                <h2 class="section-title reveal">Artikel Terbaru</h2>
+                <p class="section-sub reveal">Update tips belajar dan info pendidikan terkini</p>
+            </div>
+            <div id="article-list" class="grid-3">
+                <p class="loading-text">Sedang memuat artikel...</p>
             </div>
         </div>
     </section>
 
-    <section id="konsultasi" class="consult-section reveal" style="padding: 100px 0;">
+    <section id="konsultasi" class="section-padding">
         <div class="container">
-            <div class="consult-card glass-card"
-                style="max-width: 700px; margin: auto; padding: 40px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-                <h2 style="text-align: center; margin-bottom: 20px; color: var(--primary-navy);">Konsultasi Kendala
-                    Belajar</h2>
-                <p style="text-align: center; margin-bottom: 30px;">Punya kesulitan memahami materi sekolah? Ceritakan
-                    pada kami!</p>
-                <textarea id="konsultasiInput" placeholder="Contoh: Saya kesulitan memahami rumus fisika kelas 10..."
-                    style="width: 100%; height: 150px; padding: 15px; border-radius: 10px; border: 1px solid #ddd; font-family: inherit; margin-bottom: 20px; resize: none;"></textarea>
-                <button id="konsultasiBtn" class="cta-btn" style="width: 100%; border: none; cursor: pointer;">Kirim ke
-                    Admin (via WhatsApp)</button>
+            <div class="consult-box reveal">
+                <h2>Punya Kendala Belajar?</h2>
+                <p>Ceritakan kesulitanmu, admin kami siap membantu memberikan solusi terbaik.</p>
+                <textarea id="konsultasiInput" placeholder="Tuliskan kendala belajarmu di sini..."></textarea>
+                <button id="konsultasiBtn" class="cta-btn">Kirim via WhatsApp</button>
             </div>
         </div>
     </section>
 
     <footer class="footer">
-        <div class="container footer-grid"
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
-            <div class="footer-about">
-                <img src="assets/img/image.png" alt="Edumag Logo" style="height: 50px; margin-bottom: 20px;" />
-                <p>Bimbel Edumag membantu siswa meraih mimpi dengan cara belajar yang menyenangkan.</p>
-                <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
-                    Jl. Nangka, Rejo Basuki, Kutai Barat,<br>Kalimantan Timur 75777.
-                </p>
-            </div>
-            <div class="footer-links">
-                <h4 style="margin-bottom: 20px;">Navigasi</h4>
-                <a href="#home"
-                    style="display: block; color: white; text-decoration: none; margin-bottom: 10px;">Beranda</a>
-                <a href="#program"
-                    style="display: block; color: white; text-decoration: none; margin-bottom: 10px;">Program</a>
-                <a href="#artikel"
-                    style="display: block; color: white; text-decoration: none; margin-bottom: 10px;">Artikel</a>
+        <div class="container footer-grid">
+            <div class="footer-info">
+                <img src="assets/img/image.png" alt="Logo" class="footer-logo" />
+                <p>Partner terpercaya untuk membantu siswa meraih prestasi akademik terbaik.</p>
             </div>
             <div class="footer-contact">
-                <h4 style="margin-bottom: 20px;">Kontak Kami</h4>
-                <p><i class="fab fa-whatsapp"></i> +62 851-3491-3931</p>
-                <p><i class="far fa-envelope"></i> admin@edumag.com</p>
+                <h4>Alamat Kami</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Jl. Nangka, Rejo Basuki, Kutai Barat, Kalimantan Timur
+                    75777.</p>
+                <p><i class="fa-solid fa-phone"></i> +62 851-3491-3931</p>
             </div>
         </div>
-        <div
-            style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem;">
-            &copy; 2024 Bimbel Edumag. All Rights Reserved.
+        <div class="footer-bottom">
+            &copy; 2024 Bimbel EduMag. All Rights Reserved.
         </div>
     </footer>
 
     <script src="js/main.js"></script>
     <script src="js/article.js"></script>
-
     <script>
-        // Logika sederhana untuk kirim konsultasi ke WA
-        document.getElementById('konsultasiBtn').addEventListener('click', function () {
-            const pesan = document.getElementById('konsultasiInput').value;
-            if (pesan.trim() === "") {
-                alert("Silakan tulis kendala belajar Anda terlebih dahulu.");
-                return;
-            }
-            const waLink = `https://wa.me/6285134913931?text=${encodeURIComponent("Halo Admin Edumag, saya ingin konsultasi: " + pesan)}`;
-            window.open(waLink, '_blank');
+        // Fitur WhatsApp Konsultasi
+        document.getElementById('konsultasiBtn')?.addEventListener('click', () => {
+            const msg = document.getElementById('konsultasiInput').value;
+            if (!msg) return alert("Silakan tulis pesan Anda");
+            window.open(`https://wa.me/6285134913931?text=${encodeURIComponent(msg)}`, '_blank');
         });
     </script>
 </body>
