@@ -1,0 +1,103 @@
+{
+    "brand": {
+        "name": "Bimbel Edumag",
+        "tagline": "Belajar jadi lebih mudah dan menyenangkan"
+    },
+    "whatsapp": {
+        "number": "+6285134913931",
+        "message": "Halo Admin Bimbel Edumag, saya ingin konsultasi belajar."
+    },
+    "hero": {
+        "title": "Kuasai Materi, Raih Prestasi dengan Edumag MasterKey",
+        "subtitle": "Bimbingan Belajar Inovatif untuk SD, SMP, dan SMA. Fokus pada pengembangan diri dan hasil nyata."
+    },
+    "about": {
+        "title": "Mengapa Edumag Adalah Pilihan Tepat?",
+        "description": "Kami hadir bukan hanya untuk mentransfer ilmu, tapi untuk membentuk mental juara. Metode Edumag MasterKey kami dirancang untuk membuat belajar menjadi pengalaman yang interaktif, menantang, dan sangat menyenangkan. Kami percaya pada kualitas, bukan kuantitas."
+    },
+    "usps": [
+        {
+            "icon": "fa-solid fa-lightbulb",
+            "title": "Bimbel Berorientasi Siswa",
+            "description": "Kurikulum adaptif yang menyesuaikan kecepatan belajar tiap individu. Siswa adalah fokus utama kami."
+        },
+        {
+            "icon": "fa-solid fa-key",
+            "title": "Metode Edumag MasterKey",
+            "description": "Pendekatan belajar unik yang menggabungkan teori mendalam, latihan terstruktur, dan pemecahan masalah kreatif."
+        },
+        {
+            "icon": "fa-solid fa-users",
+            "title": "Kelas Maksimal 13 Siswa",
+            "description": "Fokus pengajar maksimal dengan kelas kecil, menjamin perhatian personal dan interaksi intensif."
+        },
+        {
+            "icon": "fa-solid fa-handshake-angle",
+            "title": "Program Pengembangan Diri",
+            "description": "Sesi pengembangan soft skill dan karakter setiap semester untuk kesiapan masa depan."
+        }
+    ],
+    "programs": [
+        {
+            "icon": "fa-solid fa-book-open-reader",
+            "title": "Kelas Reguler (SD, SMP, SMA)",
+            "description": "Bimbingan intensif sesuai kurikulum sekolah dengan jadwal terstruktur dan materi lengkap."
+        },
+        {
+            "icon": "fa-solid fa-user-graduate",
+            "title": "Kelas Privat",
+            "description": "Fokus 1-on-1 dengan pengajar ahli. Fleksibel, personal, dan efektif untuk mengejar ketertinggalan atau akselerasi."
+        },
+        {
+            "icon": "fa-solid fa-laptop-code",
+            "title": "Kelas Online",
+            "description": "Pembelajaran interaktif via platform digital. Akses materi kapan saja, di mana saja."
+        }
+    ],
+    "pricing": {
+        "min_price": "Rp150.000",
+        "description": "Biaya yang terjangkau untuk kualitas belajar premium. Konsultasikan jenjang dan program spesifik Anda untuk detail harga."
+    },
+    "testimonials": [
+        {
+            "quote": "Anak saya jadi lebih percaya diri dan nilainya meningkat drastis. Metode Edumag MasterKey benar-benar berbeda!",
+            "name": "Bapak Rahmat",
+            "role": "Orang Tua Siswa SMP",
+            "icon": "fa-solid fa-star"
+        },
+        {
+            "quote": "Kelasnya seru dan materinya mudah dipahami. Gurunya sabar dan selalu memotivasi. Bimbel Edumag The Best!",
+            "name": "Anya Putri",
+            "role": "Siswa Kelas 12 SMA",
+            "icon": "fa-solid fa-star"
+        },
+        {
+            "quote": "Bukan cuma materi pelajaran, soft skill saya juga terasah. Edumag menyiapkan kami untuk sukses, bukan hanya lulus.",
+            "name": "Daniel W.",
+            "role": "Alumni Edumag",
+            "icon": "fa-solid fa-star"
+        }
+    ],
+    "faq": [
+        {
+            "question": "Apa itu Metode Edumag MasterKey?",
+            "answer": "Edumag MasterKey adalah sistem pembelajaran terpadu kami yang fokus pada pemahaman konsep, penerapan, dan penguatan mental belajar. Ini bukan sekadar menghafal, tapi menguasai materi secara fundamental."
+        },
+        {
+            "question": "Berapa lama durasi setiap sesi belajar?",
+            "answer": "Durasi rata-rata sesi belajar kami adalah 90-120 menit, disesuaikan dengan jenjang dan program yang diambil. Kami menjaga efektivitas belajar tanpa menyebabkan kejenuhan."
+        },
+        {
+            "question": "Apakah ada trial class sebelum mendaftar?",
+            "answer": "Ya, kami menyediakan sesi konsultasi gratis dan, untuk program tertentu, tersedia sesi uji coba. Silakan hubungi kami via WhatsApp untuk informasi lebih lanjut."
+        },
+        {
+            "question": "Bagaimana cara pembayaran dan pendaftarannya?",
+            "answer": "Pembayaran dapat dilakukan bulanan atau per semester. Proses pendaftaran sangat mudah, cukup konsultasikan program yang Anda minati melalui WhatsApp, dan tim kami akan memandu Anda."
+        }
+    ],
+    "cta_bottom": {
+        "title": "Siap Meraih Prestasi Terbaik?",
+        "subtitle": "Jangan tunda lagi masa depan pendidikan putra/putri Anda. Konsultasikan kebutuhan belajar spesifik Anda secara GRATIS sekarang!"
+    }
+}

@@ -1,0 +1,29 @@
+[
+    {
+        "title": "5 Tips Efektif Belajar untuk Ujian Nasional",
+        "slug": "tips-belajar-ujian-nasional",
+        "category": "Edukasi",
+        "excerpt": "Kunci sukses menghadapi ujian adalah persiapan yang terstruktur. Terapkan 5 tips ini untuk hasil yang optimal.",
+        "thumbnail": "ujian.jpg",
+        "date": "10 Desember 2025",
+        "author": "Tim Edumag"
+    },
+    {
+        "title": "Pentingnya Soft Skill untuk Siswa di Era Digital",
+        "slug": "softskill-era-digital",
+        "category": "Pengembangan Diri",
+        "excerpt": "Lebih dari sekadar nilai, kemampuan komunikasi dan pemecahan masalah adalah aset masa depan. Cari tahu mengapa ini penting.",
+        "thumbnail": "softskill.jpg",
+        "date": "01 Desember 2025",
+        "author": "Dr. Santi M."
+    },
+    {
+        "title": "Panduan Memilih Jurusan Kuliah yang Sesuai Minat",
+        "slug": "panduan-memilih-jurusan",
+        "category": "Karir",
+        "excerpt": "Kesalahan memilih jurusan dapat berakibat fatal. Ikuti panduan langkah demi langkah kami agar pilihan Anda tepat.",
+        "thumbnail": "kuliah.jpg",
+        "date": "20 November 2025",
+        "author": "Tim Edumag"
+    }
+]
