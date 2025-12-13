@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+export default function handler(req, res) {
   const code = req.query.code;
 
   if (!code) {
@@ -12,17 +12,19 @@ export default async function handler(req, res) {
 <html>
   <body>
     <script>
-      if (window.opener) {
-        window.opener.postMessage(
-          {
-            type: "authorization_response",
-            provider: "github",
-            code: "${code}"
-          },
-          "*"
-        );
-        window.close();
-      }
+      (function () {
+        if (window.opener) {
+          window.opener.postMessage(
+            {
+              type: "authorization_response",
+              provider: "github",
+              code: "${code}"
+            },
+            window.location.origin
+          );
+          window.close();
+        }
+      })();
     </script>
   </body>
 </html>
