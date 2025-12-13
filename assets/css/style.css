@@ -1,23 +1,24 @@
-/* style.css (Pop Art Lengkap & Responsif - TANPA TEXT SHADOW) */
+/* ----------------------------------------------------------------- */
+/* style.css | Pop Art Landing Page | Final & Optimized (Fix Lebar Kotak Testimoni) */
+/* ----------------------------------------------------------------- */
 
-/* --- Variabel Warna Pop Art (Dibersihkan dan Diberi Nama Jelas) --- */
+/* --- Variabel Warna Pop Art --- */
 :root {
     --color-primary: #ffffff;
-    /* Putih */
     --color-secondary: #FF4500;
-    /* Merah Jingga (Aksen utama) */
     --color-dark: #002244;
-    /* Biru Tua/Navy (Border, Shadow, Teks Judul) */
     --color-light: #ECF0F1;
-    /* Abu Muda (Background Section) */
     --color-yellow-dominant: #FFFF00;
-    /* KUNING DOMINAN BARU (Background Body) */
     --color-text: #34495E;
-    /* Warna Teks Standar/Paragraf */
     --pop-art-shadow: 6px 6px 0px var(--color-dark);
-    /* Shadow Tegas */
     --pop-art-border: 4px solid var(--color-dark);
+
+    /* SKALA DESKTOP: Ukuran font dasar 13px */
+    font-size: 13px;
 }
+
+/* --- END Variabel Warna Pop Art --- */
+
 
 /* --- Base & Typography --- */
 body {
@@ -28,6 +29,7 @@ body {
     padding: 0;
     background-color: var(--color-yellow-dominant);
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 h1,
@@ -36,20 +38,31 @@ h3,
 h4 {
     color: var(--color-dark);
     font-weight: 700;
-    /* PERBAIKAN: Menghapus animasi shadowBob (Karena terkait text-shadow) */
-    /* animation: shadowBob 3s infinite alternate; */
 }
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.9rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
 
 /* --- Container & Layout Dasar --- */
 .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 0;
+    padding: 40px 20px;
 }
 
 section {
-    padding: 80px 0;
+    padding: 90px 0;
 }
 
 .text-center {
@@ -59,6 +72,9 @@ section {
 .bg-light {
     background-color: var(--color-light);
 }
+
+/* --- END Container & Layout Dasar --- */
+
 
 /* --- Komponen Pop Art (Card, Button) --- */
 .card-pop {
@@ -75,11 +91,10 @@ section {
     box-shadow: 10px 10px 0px var(--color-secondary);
 }
 
-/* Tombol CTA Utama */
 .btn-primary,
 .btn-secondary {
     display: inline-block;
-    padding: 12px 25px;
+    padding: 10px 22px;
     border-radius: 10px;
     font-weight: 700;
     text-decoration: none;
@@ -87,6 +102,7 @@ section {
     transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
     border: none;
     cursor: pointer;
+    font-size: 1.1rem;
 }
 
 .btn-primary {
@@ -102,10 +118,13 @@ section {
     box-shadow: 0 6px 0 var(--color-dark);
 }
 
+/* --- END Komponen Pop Art --- */
+
+
 /* --- Header & Navbar (Sticky) --- */
 .header {
     background-color: var(--color-dark);
-    padding: 15px 0;
+    padding: 12px 0;
     border-bottom: var(--pop-art-border);
     position: sticky;
     top: 0;
@@ -123,7 +142,7 @@ section {
 
 .logo a {
     color: var(--color-primary);
-    font-size: 1.8em;
+    font-size: 1.5rem;
     font-weight: 900;
     text-decoration: none;
     display: flex;
@@ -132,14 +151,14 @@ section {
 }
 
 .logo img {
-    height: 35px;
+    height: 30px;
     width: auto;
 }
 
 .nav-links a {
     color: var(--color-light);
     text-decoration: none;
-    margin-left: 25px;
+    margin-left: 20px;
     font-weight: 500;
     transition: color 0.2s;
 }
@@ -147,6 +166,8 @@ section {
 .nav-links a:hover {
     color: var(--color-primary);
 }
+
+/* --- END Header & Navbar --- */
 
 
 /* --- Hero Section --- */
@@ -168,8 +189,7 @@ section {
     background: linear-gradient(135deg, var(--color-primary) 0%, #FFEA00 50%, var(--color-secondary) 100%);
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite;
-
-    padding: 100px 0;
+    padding: 70px 0;
     border-bottom: var(--pop-art-border);
     position: relative;
     overflow: hidden;
@@ -187,14 +207,6 @@ section {
     align-items: center;
 }
 
-#hero h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
-    /* PERBAIKAN: Menghapus text-shadow di H1 Hero */
-    /* text-shadow: 3px 3px var(--color-secondary); */
-    color: var(--color-dark);
-}
-
 .hero-visual img {
     width: 100%;
     height: auto;
@@ -208,8 +220,10 @@ section {
     transform: rotate(1deg);
 }
 
+/* --- END Hero Section --- */
 
-/* --- Layout Grid Dasar --- */
+
+/* --- Layout Grid Dasar (Hanya untuk Grid Statis) --- */
 .grid-4,
 .grid-3,
 .grid-2 {
@@ -230,49 +244,84 @@ section {
     grid-template-columns: repeat(2, 1fr);
 }
 
-/* --- USP & Programs (Swiper Fix) --- */
+/* --- END Layout Grid Dasar --- */
+
+
+/* --- USP, Programs, Testimonials (Swiper Fix & Style) --- */
+
 .swiper-wrapper {
     align-items: stretch;
 }
 
 .swiper-slide {
     height: auto;
+    padding: 0;
 }
 
+/* PENTING: Fix Lebar Box Testimoni (Khusus untuk slide/card) */
+#testimonials .swiper-slide {
+    /* Membatasi lebar maksimum slide agar kartu tidak terlalu melebar */
+    max-width: 400px;
+    /* Memastikan slide berada di tengah (jika ada ruang kosong di samping) */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Styling Icon Keunggulan (USP) */
 .usp-item i {
-    font-size: 3em;
+    font-size: 2.2rem;
     color: var(--color-secondary);
+    margin-top: 10px;
     margin-bottom: 15px;
     display: block;
 }
 
-.program-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-    border-bottom: 3px solid var(--color-dark);
+/* Styling Icon Program */
+.program-card i {
+    font-size: 3.0rem;
+    color: var(--color-secondary);
+    margin-bottom: 20px;
+    display: block;
 }
 
-.program-card .card-content {
-    padding: 20px;
+/* Penyesuaian Program Card */
+.program-card {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 220px;
 }
 
 .program-card h4 {
     margin-top: 0;
     color: var(--color-secondary);
+    font-size: 1.1rem;
 }
 
-/* --- Testimonials --- */
+/* KARTU TESTIMONIAL (PADDING EKSTREM LEGA & FIX LEBAR) */
+.testimonial-card {
+    /* Padding ditingkatkan menjadi 60px di semua sisi agar sangat lega */
+    padding: 60px;
+}
+
 .testimonial-card i {
     color: var(--color-secondary);
-    font-size: 1.5em;
+    font-size: 1.5rem;
     margin-right: 10px;
+    margin-bottom: 5px;
+    display: inline-block;
 }
 
 .testimonial-card p {
     font-style: italic;
+    /* Margin vertikal yang ditingkatkan lagi agar tidak mepet ke ikon atau nama */
+    margin: 30px 0;
 }
+
+/* --- END USP, Programs, Testimonials --- */
+
 
 /* --- FAQ (Accordion) --- */
 .faq-item {
@@ -303,7 +352,6 @@ section {
 
 .faq-answer.open {
     padding: 15px 20px;
-    /* max-height disetel oleh JS */
     transition: max-height 0.5s ease-in, padding 0.5s;
 }
 
@@ -315,12 +363,14 @@ section {
     transform: rotate(180deg);
 }
 
+/* --- END FAQ (Accordion) */
+
 
 /* --- CTA Section Khusus --- */
 #cta-section {
     background-color: var(--color-secondary);
     text-align: center;
-    padding: 60px 0;
+    padding: 50px 0;
     border-top: var(--pop-art-border);
     border-bottom: var(--pop-art-border);
 }
@@ -328,9 +378,10 @@ section {
 #cta-section h2 {
     color: var(--color-primary);
     margin-bottom: 30px;
-    /* PERBAIKAN: Menghapus text-shadow di H2 CTA */
-    /* text-shadow: 2px 2px var(--color-dark); */
 }
+
+/* --- END CTA Section --- */
+
 
 /* --- Footer --- */
 .footer {
@@ -367,6 +418,9 @@ section {
     color: var(--color-secondary);
 }
 
+/* --- END Footer --- */
+
+
 /* --- Floating WhatsApp Button & Keyframes --- */
 @keyframes pulse {
     0% {
@@ -382,12 +436,6 @@ section {
     }
 }
 
-/* PERBAIKAN: Menghapus Keyframes shadowBob */
-/* @keyframes shadowBob {
-    0%, 100% { text-shadow: 3px 3px 0 var(--color-secondary); }
-    50% { text-shadow: 4px 4px 0 var(--color-secondary); }
-} */
-
 .whatsapp-float {
     position: fixed;
     bottom: 20px;
@@ -395,17 +443,19 @@ section {
     background-color: #25D366;
     color: var(--color-primary);
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
+    font-size: 1.8rem;
     z-index: 1000;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border: 3px solid var(--color-dark);
     animation: pulse 2s infinite;
 }
+
+/* --- END Floating WhatsApp Button & Keyframes --- */
 
 
 /* ======================================= */
@@ -414,20 +464,26 @@ section {
 
 @media (max-width: 768px) {
 
+    /* Font size di mobile dipertahankan 14px */
+    :root {
+        font-size: 14px;
+    }
+
     /* 1. Ukuran Teks dan Padding */
     h1 {
-        font-size: 2.2em !important;
+        font-size: 2.0rem !important;
     }
 
     h2 {
-        font-size: 1.8em !important;
+        font-size: 1.6rem !important;
     }
 
     section {
-        padding: 40px 0;
+        padding: 60px 0;
     }
 
     .container {
+        width: 100%;
         padding: 0 15px;
     }
 
@@ -437,15 +493,27 @@ section {
     }
 
     .navbar {
-        flex-wrap: wrap;
+        width: 95%;
+        margin: 0 auto;
+        flex-wrap: nowrap;
     }
 
     .nav-links {
         display: none;
     }
 
+    .logo {
+        max-width: 70%;
+    }
+
     .logo a {
-        font-size: 1.5em;
+        font-size: 1.5rem;
+    }
+
+    .logo img {
+        max-width: 100%;
+        height: 30px;
+        width: auto;
     }
 
     /* 3. Hero Section */
@@ -459,6 +527,10 @@ section {
         order: -1;
     }
 
+    .hero-text {
+        padding-top: 20px;
+    }
+
     /* Tombol Lebar Penuh */
     .btn-primary,
     .btn-secondary {
@@ -466,16 +538,27 @@ section {
         margin-bottom: 10px;
     }
 
-    /* 4. Layout Grid */
+    /* 4. Swiper/Layout Grid */
+    .swiper-slide {
+        padding: 0;
+    }
+
+    /* Hapus Batas Lebar di Mobile agar Slide menggunakan lebar penuh yang ada */
+    #testimonials .swiper-slide {
+        max-width: none;
+        margin: 0;
+    }
+
+
     .grid-4,
     .grid-3,
     .grid-2 {
-        grid-template-columns: 1fr;
         padding-top: 15px;
     }
 
-    .card-pop {
-        padding: 20px;
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none !important;
     }
 
     /* 5. Footer */
@@ -498,8 +581,10 @@ section {
     .whatsapp-float {
         width: 50px;
         height: 50px;
-        font-size: 1.5em;
+        font-size: 1.5rem;
         bottom: 15px;
         right: 15px;
     }
 }
+
+/* --- END OPTIMASI RESPONSIF (MOBILE) --- */

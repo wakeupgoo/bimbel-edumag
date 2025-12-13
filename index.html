@@ -4,15 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bimbel Edumag - Belajar Jadi Lebih Mudah dan Menyenangkan</title>
+    <title>Bimbel Edumag - Belajar Lebih Mudah, Menyenangkan, dan Raih Nilai Terbaik</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 
-    <a href="#" id="wa-float" target="_blank" class="whatsapp-float" title="Konsultasi Belajar">
+    <a href="#" target="_blank" class="whatsapp-float" id="wa-float" title="Konsultasi Belajar">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -20,7 +27,7 @@
         <nav class="navbar">
             <div class="logo">
                 <a href="index.html">
-                    <img src="/assets/images/logo edumag.png" alt="Logo Bimbel Edumag">
+                    <img src="assets/images/logo edumag.png" alt="Logo Bimbel Edumag">
                     Bimbel Edumag
                 </a>
             </div>
@@ -29,7 +36,7 @@
                 <a href="#programs">Program</a>
                 <a href="#pricing">Harga</a>
                 <a href="blog.html">Blog</a>
-                <a href="#" id="wa-nav" class="btn-primary">Konsultasi Belajar Sekarang</a>
+                <a href="#" target="_blank" class="btn-primary" id="wa-nav-btn">Konsultasi Belajar Sekarang</a>
             </div>
         </nav>
     </header>
@@ -37,16 +44,16 @@
     <section id="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-text">
+                <div class="hero-text" data-aos="fade-right">
                     <h1 id="hero-headline"></h1>
                     <p class="lead" id="hero-subheadline" style="font-size: 1.2em; margin-bottom: 40px;"></p>
-                    <a href="#" id="wa-hero" class="btn-primary" style="font-size: 1.2em;">
+                    <a href="#" target="_blank" class="btn-primary" id="wa-hero-btn" style="font-size: 1.2em;">
                         <i class="fab fa-whatsapp"></i> Diskusi Gratis dengan Admin Edumag
                     </a>
                 </div>
 
-                <div class="hero-visual">
-                    <img src="/assets/images/hero.png" alt="Ilustrasi Pop Art Sukses Belajar"
+                <div class="hero-visual" data-aos="fade-left">
+                    <img src="assets/images/hero.png" alt="Ilustrasi Pop Art Sukses Belajar"
                         onerror="this.onerror=null;this.src='https://via.placeholder.com/500x350?text=Gambar+Hero+Pop+Art';" />
                 </div>
             </div>
@@ -55,8 +62,12 @@
 
     <section id="usp">
         <div class="container">
-            <h2 class="text-center">Keunggulan Edumag: Fokus Kualitas & Pengembangan Diri</h2>
-            <div class="grid-4" id="usp-list">
+            <h2 class="text-center" data-aos="fade-down">Keunggulan Edumag: Fokus Kualitas & Pengembangan Diri</h2>
+
+            <div class="swiper-container swiper-usp-container" data-aos="fade-up">
+                <div class="swiper-wrapper" id="usp-list">
+                </div>
+                <div class="swiper-pagination swiper-usp-pagination"></div>
             </div>
         </div>
     </section>
@@ -64,15 +75,15 @@
     <section id="about" class="bg-light">
         <div class="container">
             <div class="grid-2" style="align-items: center;">
-                <div>
+                <div data-aos="fade-right">
                     <h2 id="about-title"></h2>
                     <p id="about-content"></p>
                 </div>
-                <div>
+                <div data-aos="zoom-in" data-aos-delay="300">
                     <div class="card-pop"
                         style="min-height: 250px; background-color: var(--color-primary); display: flex; align-items: center; justify-content: center; font-size: 1.5em;">
-                        <i class="fas fa-graduation-cap" style="font-size: 4em; margin-right: 20px;"></i>
-                        <p style="margin: 0;">#BelajarMasterKey</p>
+                        <i class="fas fa-key" style="font-size: 4em; margin-right: 20px;"></i>
+                        <p style="margin: 0;">#MetodeMasterKey</p>
                     </div>
                 </div>
             </div>
@@ -81,20 +92,26 @@
 
     <section id="programs">
         <div class="container">
-            <h2 class="text-center">Pilihan Program Belajar Sesuai Jenjang</h2>
-            <div class="grid-4" id="programs-list">
+            <h2 class="text-center" data-aos="fade-down">Pilihan Program Belajar Sesuai Jenjang</h2>
+
+            <div class="swiper-container swiper-programs-container" data-aos="fade-up">
+                <div class="swiper-wrapper" id="programs-list">
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination swiper-programs-pagination"></div>
             </div>
         </div>
     </section>
 
     <section id="pricing" class="bg-light">
-        <div class="container text-center">
+        <div class="container text-center" data-aos="zoom-in">
             <h2 style="color: var(--color-secondary);">Investasi Belajar Mulai Dari</h2>
             <p id="pricing-value"
                 style="font-size: 3em; font-weight: 900; color: var(--color-dark); margin-top: 10px; margin-bottom: 20px;">
             </p>
             <p id="pricing-note" style="max-width: 600px; margin: 0 auto 30px;"></p>
-            <a href="#" id="wa-pricing" class="btn-primary">
+            <a href="#" target="_blank" class="btn-primary" id="wa-pricing-btn">
                 <i class="fab fa-whatsapp"></i> Dapatkan Rincian Harga Lengkap
             </a>
         </div>
@@ -102,24 +119,29 @@
 
     <section id="testimonials">
         <div class="container">
-            <h2 class="text-center">Apa Kata Mereka Tentang Edumag?</h2>
-            <div class="grid-2" id="testimonials-list">
+            <h2 class="text-center" data-aos="fade-down">Apa Kata Mereka Tentang Edumag?</h2>
+
+            <div class="swiper-container swiper-testimonials-container" data-aos="fade-up">
+                <div class="swiper-wrapper" id="testimonials-list">
+                </div>
+                <div class="swiper-pagination swiper-testimonials-pagination"></div>
             </div>
         </div>
     </section>
 
     <section id="faq" class="bg-light">
         <div class="container">
-            <h2 class="text-center">Pertanyaan Umum (FAQ)</h2>
+            <h2 class="text-center" data-aos="fade-down">Pertanyaan Umum (FAQ)</h2>
             <div class="faq-container" id="faq-list" style="max-width: 800px; margin: 30px auto 0;">
             </div>
         </div>
     </section>
 
-    <section id="cta-section">
+    <section id="cta-section" data-aos="zoom-in">
         <div class="container">
             <h2>Waktunya Ambil Langkah Pertama Menuju Nilai Terbaik!</h2>
-            <a href="#" id="wa-cta" class="btn-primary" style="font-size: 1.5em; padding: 15px 35px;">
+            <a href="#" target="_blank" class="btn-primary" id="wa-cta-btn"
+                style="font-size: 1.5em; padding: 15px 35px;">
                 <i class="fab fa-whatsapp"></i> Konsultasikan Kebutuhan Belajar Siswa Anda Sekarang
             </a>
         </div>
@@ -129,25 +151,35 @@
         <div class="container">
             <div class="brand">
                 <a href="index.html" style="font-size: 1.5em; font-weight: 900;">Edumag</a>
-                <p>“Belajar jadi lebih mudah dan menyenangkan”</p>
+                <p id="footer-tagline">“Belajar jadi lebih mudah dan menyenangkan”</p>
                 <p style="font-size: 0.8em; margin-top: 15px;">© 2025 Bimbel Edumag. All rights reserved.</p>
             </div>
             <div class="links">
-                <p style="font-weight: 600; color: var(--color-white);">Navigasi Cepat</p>
+                <p style="font-weight: 600; color: var(--color-light);">Navigasi Cepat</p>
                 <a href="#about">Tentang Kami</a>
                 <a href="#programs">Program</a>
                 <a href="blog.html">Blog Edukasi</a>
             </div>
             <div class="contact">
-                <p style="font-weight: 600; color: var(--color-white);">Hubungi Kami</p>
+                <p style="font-weight: 600; color: var(--color-light);">Hubungi Kami</p>
                 <p><i class="fas fa-map-marker-alt"></i> Lokasi: Jl. Nangka, Rejo Basuki, Kec. Barong Tongkok, Kabupaten
                     Kutai Barat, Kalimantan Timur 75777, Indonesia</p>
-                <a href="#" id="wa-footer"><i class="fab fa-whatsapp"></i> +6285134913931</a>
+                <a href="#" target="_blank" id="wa-footer-link"><i class="fab fa-whatsapp"></i> +62 851 3491 3931</a>
             </div>
         </div>
     </footer>
 
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
 </body>
 
 </html>
