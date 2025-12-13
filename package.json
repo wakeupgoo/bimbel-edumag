@@ -1,8 +1,14 @@
 {
-  "name": "decap-oauth-vercel",
+  "name": "bimbel-edumag",
   "version": "1.0.0",
   "private": true,
+  "description": "Static site with Decap CMS and GitHub OAuth on Vercel",
   "scripts": {
+    "dev": "vercel dev",
+    "build": "echo \"no build step\"",
     "start": "vercel dev"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
