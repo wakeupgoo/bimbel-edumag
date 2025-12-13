@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Edumag - Artikel Edukasi & Informasi Bimbel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* CSS Tambahan untuk Halaman Blog */
+        .article-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Penting untuk grid */
+        }
+        .article-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+            border-bottom: 3px solid var(--color-dark);
+        }
+        .article-card .card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .article-card h4 {
+            margin-top: 0;
+            color: var(--color-dark);
+        }
+        .article-card .meta {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        .article-card .meta span {
+            margin-right: 15px;
+        }
+        .read-more {
+            margin-top: auto; /* Push to bottom */
+            display: inline-block;
+            color: var(--color-secondary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" id="wa-float" target="_blank" class="whatsapp-float" title="Konsultasi Belajar">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">Edumag</a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#about">Tentang</a>
+                <a href="index.html#programs">Program</a>
+                <a href="index.html#pricing">Harga</a>
+                <a href="blog.html" style="color: var(--color-primary);">Blog</a>
+                <a href="#" id="wa-nav" class="btn-primary">Konsultasi Belajar Sekarang</a>
+            </div>
+        </nav>
+    </header>
+
+    <section id="blog-header" class="bg-light">
+        <div class="container text-center">
+            <h1 style="color: var(--color-secondary); font-size: 2.5em; text-shadow: 2px 2px var(--color-dark);">
+                <i class="fas fa-newspaper"></i> Blog Edukasi Edumag
+            </h1>
+            <p style="font-size: 1.1em; max-width: 700px; margin: 0 auto;">
+                Tingkatkan pengetahuan Anda tentang dunia pendidikan, tips belajar, dan berita terbaru dari Bimbel Edumag.
+            </p>
+        </div>
+    </section>
+
+    <section id="articles">
+        <div class="container">
+            <div class="grid-3" id="article-list">
+                </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="brand">
+                <a href="index.html" style="font-size: 1.5em; font-weight: 900;">Edumag</a>
+                <p>“Belajar jadi lebih mudah dan menyenangkan”</p>
+                <p style="font-size: 0.8em; margin-top: 15px;">© 2025 Bimbel Edumag. All rights reserved.</p>
+            </div>
+            <div class="links">
+                <p style="font-weight: 600; color: var(--color-white);">Navigasi Cepat</p>
+                <a href="index.html#about">Tentang Kami</a>
+                <a href="index.html#programs">Program</a>
+                <a href="blog.html">Blog Edukasi</a>
+            </div>
+            <div class="contact">
+                <p style="font-weight: 600; color: var(--color-white);">Hubungi Kami</p>
+                <p><i class="fas fa-map-marker-alt"></i> Lokasi Bimbel Edumag</p>
+                <a href="#" id="wa-footer-blog"><i class="fab fa-whatsapp"></i> +6285134913931</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/blog.js"></script>
+</body>
+</html>
