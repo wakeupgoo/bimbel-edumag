@@ -1,19 +1,20 @@
-/* style.css */
+/* style.css (Pop Art Lengkap & Responsif - TANPA TEXT SHADOW) */
 
-/* --- Variabel Warna Pop Art --- */
+/* --- Variabel Warna Pop Art (Dibersihkan dan Diberi Nama Jelas) --- */
 :root {
     --color-primary: #ffffff;
-    /* Putih (Diganti dari Kuning Cerah) */
+    /* Putih */
     --color-secondary: #FF4500;
-    /* Merah Jingga untuk Kontras */
+    /* Merah Jingga (Aksen utama) */
     --color-dark: #002244;
-    /* Biru Tua/Navy untuk Teks & Background Utama */
+    /* Biru Tua/Navy (Border, Shadow, Teks Judul) */
     --color-light: #ECF0F1;
-    /* Abu Muda untuk Background Section */
-    --color-white: #ffffff;
-    /* KUNING DOMINAN BARU */
+    /* Abu Muda (Background Section) */
+    --color-yellow-dominant: #FFFF00;
+    /* KUNING DOMINAN BARU (Background Body) */
     --color-text: #34495E;
-    --pop-art-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
+    /* Warna Teks Standar/Paragraf */
+    --pop-art-shadow: 6px 6px 0px var(--color-dark);
     /* Shadow Tegas */
     --pop-art-border: 4px solid var(--color-dark);
 }
@@ -21,13 +22,12 @@
 /* --- Base & Typography --- */
 body {
     font-family: 'Poppins', sans-serif;
-    /* Anggap Poppins sudah di-import via CDN/font-face */
     color: var(--color-text);
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: var(--color-white);
-    /* Warna Latar Belakang Body sekarang Kuning Dominan */
+    background-color: var(--color-yellow-dominant);
+    scroll-behavior: smooth;
 }
 
 h1,
@@ -36,6 +36,8 @@ h3,
 h4 {
     color: var(--color-dark);
     font-weight: 700;
+    /* PERBAIKAN: Menghapus animasi shadowBob (Karena terkait text-shadow) */
+    /* animation: shadowBob 3s infinite alternate; */
 }
 
 /* --- Container & Layout Dasar --- */
@@ -50,71 +52,64 @@ section {
     padding: 80px 0;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .bg-light {
     background-color: var(--color-light);
 }
 
 /* --- Komponen Pop Art (Card, Button) --- */
 .card-pop {
-    background-color: var(--color-white);
+    background-color: var(--color-primary);
     border-radius: 15px;
     box-shadow: var(--pop-art-shadow);
     border: var(--pop-art-border);
     padding: 30px;
-    transition: transform 0.3s, box-shadow 0.3s;
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-    /* Percepat transisi agar lebih 'pop' */
 }
 
 .card-pop:hover {
     transform: translateY(-5px);
-    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.3);
-
-    .card-pop:hover {
-        transform: translateY(-5px);
-        /* Naik 5px saat di-hover */
-        box-shadow: 10px 10px 0px var(--color-secondary);
-        /* Ubah warna shadow saat hover */
-        /* border: 4px solid var(--color-secondary); */
-        /* Opsional: Ubah warna border juga */
-    }
+    box-shadow: 10px 10px 0px var(--color-secondary);
 }
 
-/* Tombol CTA Utama (WhatsApp) */
+/* Tombol CTA Utama */
 .btn-primary,
 .btn-secondary {
     display: inline-block;
     padding: 12px 25px;
     border-radius: 10px;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
     text-transform: uppercase;
-    transition: background-color 0.3s, transform 0.1s;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
     border: none;
     cursor: pointer;
 }
 
 .btn-primary {
     background-color: var(--color-secondary);
-    /* Merah Jingga */
     color: var(--color-primary);
-    /* Putih */
     box-shadow: 0 4px 0 var(--color-dark);
     border: 3px solid var(--color-dark);
 }
 
 .btn-primary:hover {
     background-color: #FF6347;
-    /* Sedikit lebih cerah */
     transform: translateY(-2px);
     box-shadow: 0 6px 0 var(--color-dark);
 }
 
-/* --- Header & Navbar --- */
+/* --- Header & Navbar (Sticky) --- */
 .header {
     background-color: var(--color-dark);
     padding: 15px 0;
     border-bottom: var(--pop-art-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .navbar {
@@ -126,26 +121,20 @@ section {
     width: 90%;
 }
 
-/* Penyesuaian Logo di Navbar */
 .logo a {
     color: var(--color-primary);
-    /* Putih */
     font-size: 1.8em;
     font-weight: 900;
     text-decoration: none;
-    /* Penambahan Flexbox untuk menyatukan logo & teks */
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Jarak antara logo dan teks */
 }
 
 .logo img {
     height: 35px;
-    /* Sesuaikan ukuran logo */
     width: auto;
 }
-
 
 .nav-links a {
     color: var(--color-light);
@@ -161,8 +150,6 @@ section {
 
 
 /* --- Hero Section --- */
-
-/* Keyframes untuk Animasi Gradien (Diletakkan di luar selector) */
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
@@ -178,8 +165,7 @@ section {
 }
 
 #hero {
-    /* Background Animasi Gradien */
-    background: linear-gradient(135deg, var(--color-white) 0%, #FFEA00 50%, var(--color-secondary) 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #FFEA00 50%, var(--color-secondary) 100%);
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite;
 
@@ -189,35 +175,24 @@ section {
     overflow: hidden;
 }
 
-/* Penyesuaian Hero Section ke 2 Kolom */
 #hero .container {
     padding: 60px 0;
     text-align: left;
-    /* Teks harus kembali rata kiri di Hero */
 }
 
 .hero-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* 2 kolom sama besar */
     gap: 50px;
-    /* Jarak antar kolom */
     align-items: center;
-    /* Konten vertikal di tengah */
 }
 
 #hero h1 {
     font-size: 3em;
     margin-bottom: 20px;
-    text-shadow: 3px 3px var(--color-secondary);
-    /* Efek komik/pop art */
+    /* PERBAIKAN: Menghapus text-shadow di H1 Hero */
+    /* text-shadow: 3px 3px var(--color-secondary); */
     color: var(--color-dark);
-}
-
-.hero-text h1,
-.hero-text p {
-    margin-left: 0;
-    max-width: none;
 }
 
 .hero-visual img {
@@ -225,14 +200,12 @@ section {
     height: auto;
     border-radius: 20px;
     box-shadow: var(--pop-art-shadow);
-    /* Gunakan shadow pop art */
     border: var(--pop-art-border);
     transition: transform 0.3s;
 }
 
 .hero-visual img:hover {
     transform: rotate(1deg);
-    /* Efek ringan saat hover */
 }
 
 
@@ -257,7 +230,15 @@ section {
     grid-template-columns: repeat(2, 1fr);
 }
 
-/* --- USP Section --- */
+/* --- USP & Programs (Swiper Fix) --- */
+.swiper-wrapper {
+    align-items: stretch;
+}
+
+.swiper-slide {
+    height: auto;
+}
+
 .usp-item i {
     font-size: 3em;
     color: var(--color-secondary);
@@ -265,7 +246,6 @@ section {
     display: block;
 }
 
-/* --- Programs Section --- */
 .program-card img {
     width: 100%;
     height: 200px;
@@ -285,7 +265,7 @@ section {
 
 /* --- Testimonials --- */
 .testimonial-card i {
-    color: var(--color-primary);
+    color: var(--color-secondary);
     font-size: 1.5em;
     margin-right: 10px;
 }
@@ -314,7 +294,7 @@ section {
 }
 
 .faq-answer {
-    background-color: var(--color-white);
+    background-color: var(--color-primary);
     padding: 0 20px;
     max-height: 0;
     overflow: hidden;
@@ -323,8 +303,7 @@ section {
 
 .faq-answer.open {
     padding: 15px 20px;
-    max-height: 200px;
-    /* Nilai yang cukup besar */
+    /* max-height disetel oleh JS */
     transition: max-height 0.5s ease-in, padding 0.5s;
 }
 
@@ -348,9 +327,9 @@ section {
 
 #cta-section h2 {
     color: var(--color-primary);
-    /* Putih */
     margin-bottom: 30px;
-    text-shadow: 2px 2px var(--color-dark);
+    /* PERBAIKAN: Menghapus text-shadow di H2 CTA */
+    /* text-shadow: 2px 2px var(--color-dark); */
 }
 
 /* --- Footer --- */
@@ -364,7 +343,7 @@ section {
 .footer .container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
 }
 
@@ -377,57 +356,21 @@ section {
 }
 
 .footer a {
-    color: var(--color-white);
-    /* Kuning Dominan */
+    color: var(--color-yellow-dominant);
     text-decoration: none;
     display: block;
     margin-bottom: 5px;
+    transition: color 0.2s;
 }
 
-/* --- Floating WhatsApp Button --- */
-.whatsapp-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25D366;
-    /* WhatsApp Green */
-    color: var(--color-primary);
-    /* Putih */
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    z-index: 1000;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    border: 3px solid var(--color-dark);
-
-    /* Menerapkan Animasi Pulse */
-    animation: pulse 2s infinite;
+.footer a:hover {
+    color: var(--color-secondary);
 }
 
-/* Responsif untuk Mobile */
-@media (max-width: 768px) {
-    .hero-content {
-        grid-template-columns: 1fr;
-        /* Jadi 1 kolom di mobile */
-        gap: 30px;
-        text-align: center;
-    }
-
-    .hero-visual {
-        order: -1;
-        /* Pindahkan gambar ke atas teks di mobile */
-    }
-}
-
-/* --- Tambahan Keyframes untuk Denyut (Pulse) --- */
+/* --- Floating WhatsApp Button & Keyframes --- */
 @keyframes pulse {
     0% {
         box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-        /* Warna #25D366 (WhatsApp Green) */
     }
 
     70% {
@@ -439,12 +382,124 @@ section {
     }
 }
 
-/* --- Tambahan Keyframes untuk Shadow Bob (Judul) --- */
-@keyframes shadowBob {
-    0%, 100% {
-        text-shadow: 3px 3px 0 var(--color-secondary);
+/* PERBAIKAN: Menghapus Keyframes shadowBob */
+/* @keyframes shadowBob {
+    0%, 100% { text-shadow: 3px 3px 0 var(--color-secondary); }
+    50% { text-shadow: 4px 4px 0 var(--color-secondary); }
+} */
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366;
+    color: var(--color-primary);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--color-dark);
+    animation: pulse 2s infinite;
+}
+
+
+/* ======================================= */
+/* ====== OPTIMASI RESPONSIF (MOBILE) ====== */
+/* ======================================= */
+
+@media (max-width: 768px) {
+
+    /* 1. Ukuran Teks dan Padding */
+    h1 {
+        font-size: 2.2em !important;
     }
-    50% {
-        text-shadow: 4px 4px 0 var(--color-secondary);
+
+    h2 {
+        font-size: 1.8em !important;
+    }
+
+    section {
+        padding: 40px 0;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    /* 2. Header/Navbar */
+    .header {
+        padding: 10px 0;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .logo a {
+        font-size: 1.5em;
+    }
+
+    /* 3. Hero Section */
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .hero-visual {
+        order: -1;
+    }
+
+    /* Tombol Lebar Penuh */
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    /* 4. Layout Grid */
+    .grid-4,
+    .grid-3,
+    .grid-2 {
+        grid-template-columns: 1fr;
+        padding-top: 15px;
+    }
+
+    .card-pop {
+        padding: 20px;
+    }
+
+    /* 5. Footer */
+    .footer .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .footer .brand,
+    .footer .links,
+    .footer .contact {
+        width: 100%;
+        min-width: 100%;
+        margin-bottom: 0;
+    }
+
+    /* 6. Floating CTA */
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5em;
+        bottom: 15px;
+        right: 15px;
     }
 }

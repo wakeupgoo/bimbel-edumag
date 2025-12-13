@@ -2,6 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchDataAndRender();
+    // Inisialisasi Swiper setelah data dirender
+    // Diletakkan di fungsi terpisah agar bisa dipanggil setelah DOM USP/Testimonial terisi
 });
 
 const API_URL = 'assets/data/home.json';
@@ -42,6 +44,10 @@ async function fetchDataAndRender() {
         renderFAQ(data.faq);
         attachFAQToggleListener();
 
+        // ** Fungsionalitas Mobile/Swiper **
+        // 9. Inisialisasi Swiper untuk semua carousel
+        initializeSwipers();
+
 
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -56,7 +62,9 @@ async function fetchDataAndRender() {
  */
 function createWhatsAppLink(number, message) {
     const encodedMessage = encodeURIComponent(message);
-    return `https://wa.me/${number.replace(/\+/g, '')}?text=${encodedMessage}`;
+    // Menghilangkan semua non-digit dari nomor (termasuk '+')
+    const cleanedNumber = number.replace(/\D/g, ''); 
+    return `https://wa.me/${cleanedNumber}?text=${encodedMessage}`;
 }
 
 /**
@@ -67,19 +75,31 @@ function createWhatsAppLink(number, message) {
 function renderWhatsAppCTAs(number, message) {
     const waLink = createWhatsAppLink(number, message);
 
-    document.getElementById('wa-float').href = waLink;
-    document.getElementById('wa-nav').href = waLink;
-    document.getElementById('wa-hero').href = waLink;
-    document.getElementById('wa-pricing').href = waLink;
-    document.getElementById('wa-cta').href = waLink;
-    document.getElementById('wa-footer').href = waLink;
+    // Seleksi semua elemen yang memiliki class 'wa-cta-link'
+    const ctaLinks = document.querySelectorAll('.wa-cta-link');
+    ctaLinks.forEach(link => {
+        link.href = waLink;
+    });
+
+    // Menghapus ID yang berulang, cukup pakai class:
+    // document.getElementById('wa-float').href = waLink; // Contoh: ganti ID ini dengan class
+    // document.getElementById('wa-nav').href = waLink;
+    // ... dst
 }
 
 
+/**
+ * Mengubah USP (Keunggulan) menjadi struktur Swiper-Friendly
+ */
 function renderUSP(uspArray) {
-    const uspList = document.getElementById('usp-list');
-    uspList.innerHTML = uspArray.map(item => `
-        <div class="usp-item card-pop text-center">
+    const uspListContainer = document.getElementById('usp-list');
+    
+    // Perubahan: Menambahkan class 'swiper-wrapper' ke div terluar jika ID-nya adalah 'usp-list'
+    // ATAU lebih baik: Buat div baru dengan ID="usp-list-wrapper"
+    uspListContainer.classList.add('swiper-wrapper');
+
+    uspListContainer.innerHTML = uspArray.map(item => `
+        <div class="usp-item card-pop text-center swiper-slide">
             <i class="fas ${item.icon}"></i>
             <h4>${item.title}</h4>
             <p>${item.description}</p>
@@ -87,10 +107,16 @@ function renderUSP(uspArray) {
     `).join('');
 }
 
+
+/**
+ * Mengubah Programs menjadi struktur Swiper-Friendly
+ */
 function renderPrograms(programArray) {
-    const programList = document.getElementById('programs-list');
-    programList.innerHTML = programArray.map(item => `
-        <div class="program-card card-pop">
+    const programListContainer = document.getElementById('programs-list');
+    programListContainer.classList.add('swiper-wrapper');
+
+    programListContainer.innerHTML = programArray.map(item => `
+        <div class="program-card card-pop swiper-slide">
             <img src="${item.image}" alt="Program ${item.level}">
             <div class="card-content">
                 <h4>${item.level}</h4>
@@ -100,10 +126,15 @@ function renderPrograms(programArray) {
     `).join('');
 }
 
+/**
+ * Mengubah Testimonials menjadi struktur Swiper-Friendly
+ */
 function renderTestimonials(testimonialArray) {
-    const testimonialList = document.getElementById('testimonials-list');
-    testimonialList.innerHTML = testimonialArray.map(item => `
-        <div class="testimonial-card card-pop">
+    const testimonialListContainer = document.getElementById('testimonials-list');
+    testimonialListContainer.classList.add('swiper-wrapper');
+    
+    testimonialListContainer.innerHTML = testimonialArray.map(item => `
+        <div class="testimonial-card card-pop swiper-slide">
             <p><i class="fas fa-quote-left"></i> ${item.text}</p>
             <p><strong>- ${item.name}</strong></p>
         </div>
@@ -132,28 +163,34 @@ function attachFAQToggleListener() {
             const answer = question.nextElementSibling;
             const icon = question.querySelector('i');
 
-            // Close all open answers
+            // --- Logika Penutupan Akordion Lain ---
             document.querySelectorAll('.faq-answer.open').forEach(openAnswer => {
                 if (openAnswer !== answer) {
                     openAnswer.classList.remove('open');
                     openAnswer.previousElementSibling.classList.remove('active');
                     openAnswer.style.maxHeight = 0;
-                    openAnswer.previousElementSibling.querySelector('i').classList.remove('fa-chevron-up');
-                    openAnswer.previousElementSibling.querySelector('i').classList.add('fa-chevron-down');
+                    
+                    // Memperbaiki ikon panah saat ditutup
+                    const oldIcon = openAnswer.previousElementSibling.querySelector('i');
+                    oldIcon.classList.remove('fa-chevron-up');
+                    oldIcon.classList.add('fa-chevron-down');
                 }
             });
 
-            // Toggle the clicked answer
+            // --- Logika Toggle Jawaban yang Diklik ---
             if (answer.classList.contains('open')) {
+                // Tutup
                 answer.classList.remove('open');
                 question.classList.remove('active');
                 answer.style.maxHeight = 0;
                 icon.classList.remove('fa-chevron-up');
                 icon.classList.add('fa-chevron-down');
             } else {
+                // Buka
                 answer.classList.add('open');
                 question.classList.add('active');
-                answer.style.maxHeight = answer.scrollHeight + "px"; // Set max height for smooth transition
+                // Mengambil scrollHeight untuk transisi yang dinamis
+                answer.style.maxHeight = answer.scrollHeight + 30 + "px"; // Tambah 30px untuk padding
                 icon.classList.remove('fa-chevron-down');
                 icon.classList.add('fa-chevron-up');
             }
@@ -161,3 +198,65 @@ function attachFAQToggleListener() {
     });
 }
 
+/**
+ * Inisialisasi Swiper.js untuk semua section yang membutuhkan swipe.
+ * Catatan: Memerlukan link Swiper CSS dan JS di HTML.
+ */
+function initializeSwipers() {
+    // 1. Swiper USP (Keunggulan)
+    if (document.getElementById('usp-list')) {
+        new Swiper(document.getElementById('usp-list').parentNode, { // Parent harus dipanggil karena idlist sudah jadi swiper-wrapper
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                769: {
+                    slidesPerView: 3, // Di Desktop/Tablet tetap pakai 3 atau 4 card
+                    spaceBetween: 30
+                },
+                1024: {
+                    slidesPerView: 4, 
+                    spaceBetween: 30
+                }
+            }
+        });
+    }
+
+    // 2. Swiper Programs
+    if (document.getElementById('programs-list')) {
+        new Swiper(document.getElementById('programs-list').parentNode, {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: {
+                el: ".swiper-pagination-programs",
+                clickable: true,
+            },
+            breakpoints: {
+                769: {
+                    slidesPerView: 3, 
+                    spaceBetween: 30
+                }
+            }
+        });
+    }
+
+    // 3. Swiper Testimonials
+    if (document.getElementById('testimonials-list')) {
+        new Swiper(document.getElementById('testimonials-list').parentNode, {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination-testimonials",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            }
+        });
+    }
+}
