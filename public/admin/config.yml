@@ -3,7 +3,7 @@ backend:
   repo: wakeupgoo/bimbel-edumag
   branch: main
   base_url: https://bimbeledumag.my.id
-  auth_endpoint: api/auth
+  auth_endpoint: /api/auth
 
 publish_mode: editorial_workflow
 
@@ -17,9 +17,9 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "1. Judul", name: "title", widget: "string", required: true}
-      - {label: "2. Kategori", name: "category", widget: "select", options: ["Tips Belajar", "Persiapan Ujian", "Motivasi"]}
-      - {label: "3. Waktu Baca (Menit)", name: "readTime", widget: "number"}
-      - {label: "4. Ringkasan", name: "excerpt", widget: "text"}
-      - {label: "5. Thumbnail", name: "thumbnail", widget: "image"}
-      - {label: "6. Isi Konten", name: "body", widget: "markdown"}
+      - { label: "1. Judul", name: "title", widget: "string", required: true }
+      - { label: "2. Kategori", name: "category", widget: "select", options: ["Tips Belajar", "Persiapan Ujian", "Motivasi"] }
+      - { label: "3. Waktu Baca (Menit)", name: "readTime", widget: "number" }
+      - { label: "4. Ringkasan", name: "excerpt", widget: "text" }
+      - { label: "5. Thumbnail", name: "thumbnail", widget: "image" }
+      - { label: "6. Isi Konten", name: "body", widget: "markdown" }
