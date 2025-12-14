@@ -4,6 +4,28 @@
         "tagline": "Belajar jadi mudah dan menyenangkan",
         "description": "Edumag adalah bimbel inovatif yang menggabungkan pembelajaran akademik, pengembangan karakter, dan kesadaran sosial melalui pendekatan aktif, kontekstual, dan bermakna."
     },
+    "masterkey": [
+        {
+            "title": "Assessment Awal",
+            "description": "Evaluasi kemampuan awal siswa untuk menentukan titik awal pembelajaran yang tepat."
+        },
+        {
+            "title": "Personalized Learning Path",
+            "description": "Rencana pembelajaran yang disesuaikan dengan gaya belajar dan kebutuhan individu siswa."
+        },
+        {
+            "title": "Interactive Learning",
+            "description": "Metode pembelajaran interaktif dengan teknologi modern dan materi yang menarik."
+        },
+        {
+            "title": "Regular Assessment",
+            "description": "Evaluasi berkala untuk memantau perkembangan dan menyesuaikan strategi pembelajaran."
+        },
+        {
+            "title": "Motivational Support",
+            "description": "Dukungan motivasi dan bimbingan psikologis untuk membangun kepercayaan diri siswa."
+        }
+    ],
     "filosofi": {
         "metode": "Edumag MasterKey",
         "breakdown": {

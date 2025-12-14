@@ -129,6 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
             updateElement('hero-subtitle', 'text', data.brand.tagline);
             updateElement('about-title', 'text', `Mengapa ${data.brand.name} Adalah Pilihan Tepat?`);
             updateElement('about-desc', 'text', data.brand.description);
+            updateElement('masterkey-title', 'text', 'Edumag MasterKey');
+            updateElement('masterkey-subtitle', 'text', 'Metode pembelajaran inovatif yang mengubah cara siswa belajar');
             updateElement('pricing-info', 'html', `Mulai dari <span class="price">${data.pricing.min_price}</span> . ${data.pricing.description}`);
             updateElement('cta-bottom-title', 'text', data.cta_bottom.title);
             updateElement('cta-bottom-subtitle', 'text', data.cta_bottom.subtitle);
@@ -138,6 +140,29 @@ document.addEventListener('DOMContentLoaded', () => {
             renderList(data.programs, '[data-js-hook="program-list"]', createProgramTemplate);
             renderList(data.testimonials, '[data-js-hook="testimonial-list"]', createTestimonialTemplate);
             renderList(data.faq, '[data-js-hook="faq-list"]', createFAQTemplate);
+
+            // 3. Render MasterKey section
+            const masterkeyList = document.querySelector('[data-js-hook="masterkey-list"]');
+            if (masterkeyList && data.masterkey) {
+                masterkeyList.innerHTML = data.masterkey.map((item, index) => `
+                    <div class="masterkey-item" data-js-hook="scroll-reveal" data-step="${index + 1}">
+                        <div class="step-number">${index + 1}</div>
+                        <h4>${item.title}</h4>
+                        <p>${item.description}</p>
+                    </div>
+                `).join('');
+            }
+
+            // 4. Render Visi & Misi section
+            const visiText = document.querySelector('[data-js-hook="visi-text"]');
+            if (visiText && data.visi) {
+                visiText.textContent = data.visi;
+            }
+
+            const misiList = document.querySelector('[data-js-hook="misi-list"]');
+            if (misiList && data.misi) {
+                misiList.innerHTML = data.misi.map(item => `<li>${item}</li>`).join('');
+            }
 
             // 3. Render WhatsApp CTAs
             updateElement('whatsapp-cta', 'href', waLink);

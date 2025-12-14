@@ -1,24 +1,28 @@
-# Code Cleanup Tasks
+# Website Enhancement Tasks
 
-## 1. Logo Consistency
-- [x] Update blog.html logo to match index.html split design with icon and text
-- [x] Ensure logo classes match CSS definitions
+## 1. HTML Updates
+- [x] Add Edumag MasterKey section after about section with interactive filosofi breakdown items
+- [x] Add Visi & Misi section after MasterKey with visi and misi content
 
-## 2. Footer Consistency
-- [x] Update blog.html footer address and tagline to match index.html
-- [x] Add missing data-js-hook for brand-tagline in blog.html
+## 2. CSS Enhancements
+- [x] Add global @keyframes for fade-in, slide-up, scale-in animations
+- [x] Implement prefers-reduced-motion support
+- [x] Enhance scroll reveal with specific animations per section
+- [x] Add button ripple effect and focus-visible styles
+- [x] Style new MasterKey and Visi & Misi sections
+- [x] Add tooltip styles for educational terms
+- [x] Update navbar with active section highlighting and scroll-based style changes
 
-## 3. CSS Cleanup
-- [x] Remove or fix unused logo classes
-- [x] Ensure all logo-related styles are consistent
+## 3. JavaScript Enhancements
+- [x] Add MasterKey interaction logic (hover scale/rotate, click accordion)
+- [x] Implement button ripple effect
+- [x] Add tooltip functionality
+- [x] Enhance scroll observer for specific section targeting
+- [x] Update navbar with active section highlighting
+- [x] Add smooth scroll behavior
+- [x] Update content rendering to include new sections
 
-## 4. HTML Improvements
-- [x] Add data-js-hook attributes for dynamic content in blog.html
-- [x] Ensure consistent structure between pages
-
-## 5. Mobile Hamburger Menu
-- [x] Add hamburger button to navbar
-- [x] Create mobile menu overlay and slide-out menu
-- [x] Add CSS for hamburger animation and mobile menu styling
-- [x] Add JavaScript functionality for menu toggle
-- [x] Add media query to show hamburger on mobile devices
+## 4. Testing & Optimization
+- [ ] Test all animations and interactions across devices
+- [ ] Ensure responsive design and accessibility
+- [ ] Verify no performance impact on Core Web Vitals
