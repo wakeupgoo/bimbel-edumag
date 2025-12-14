@@ -848,6 +848,11 @@ section {
         align-items: center;
     }
 
+    /* Hide mobile WhatsApp button on desktop */
+    [aria-label="WhatsApp Mobile"] {
+        display: none;
+    }
+
     .floating-cta .btn span {
         display: inline;
         margin-left: 0.5rem;
