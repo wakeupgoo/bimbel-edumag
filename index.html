@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-js-hook="brand-name">Bimbel Edumag - Belajar Jadi Lebih Mudah dan Menyenangkan</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -20,11 +20,11 @@
 
     <header class="navbar">
         <div class="container nav-content">
-            <a href="index.html" class="logo logo-split" data-js-hook="brand-name">
-                <i class="fa-solid fa-rocket logo-icon"></i>
+            <a href="index.html" class="logo logo-split">
+                <img src="./assets/images/logo-new.png" alt="Bimbel Edumag Logo" class="logo-image">
                 <div class="logo-text">
-                    <span class="logo-bimbel">Bimbel</span>
-                    <span class="logo-edumag">Edumag</span>
+                    <span class="tulisan-edumag">Bimbel</span>
+                    <span class="tulisan-edumag">Edumag</span>
                 </div>
             </a>
             <nav class="nav-links">
@@ -37,12 +37,34 @@
                     <i class="fa-brands fa-whatsapp"></i> Hubungi Kami
                 </a>
             </nav>
+            <button class="hamburger" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
             <a href="#" class="btn btn-primary-outline" data-js-hook="whatsapp-cta" target="_blank"
                 aria-label="WhatsApp Mobile">
                 <i class="fa-brands fa-whatsapp"></i>
             </a>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <nav class="nav-links">
+            <a href="#program">Program</a>
+            <a href="#keunggulan">Keunggulan</a>
+            <a href="#testimoni">Testimoni</a>
+            <a href="blog.html">Blog</a>
+            <a href="#faq">FAQ</a>
+            <a href="#" class="btn btn-primary" data-js-hook="whatsapp-cta" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> Hubungi Kami
+            </a>
+        </nav>
+    </div>
 
     <main>
         <section class="hero" data-js-hook="scroll-reveal">
@@ -162,7 +184,7 @@
                     </p>
                     <p>
                         <a href="#" data-js-hook="whatsapp-cta" target="_blank">
-                            <i class="fa-brands fa-whatsapp"></i> +62 851 3491 3931
+                            <i class="fa-brands fa-whatsapp"></i> <span data-js-hook="whatsapp-number"></span>
                         </a>
                     </p>
                 </div>

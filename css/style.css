@@ -1,6 +1,6 @@
 /*
  * style.css - Clean, Futuristik, Pop Art, Responsive
- * Primary Color: #FFD700 (Gold/Yellow)
+ * Logo Colors: Dark Blue (#1e40af), Light Blue (#3b82f6), Yellow (#FFD700)
  */
 
 /* --- Base Styles & Typography --- */
@@ -8,9 +8,11 @@
 
 :root {
     --color-primary: #FFD700;
-    /* Pop Yellow */
-    --color-secondary: #007bff;
-    /* Accent Blue */
+    /* Logo Yellow */
+    --color-secondary: #1e40af;
+    /* Logo Dark Blue */
+    --color-accent: #3b82f6;
+    /* Logo Light Blue */
     --color-dark: #1f2937;
     /* Dark Grey for text/bg */
     --color-light: #f9fafb;
@@ -179,10 +181,16 @@ section {
 }
 
 .logo-image {
-    height: 35px;
-    /* Pastikan nilai ini ada dan tidak nol */
+    height: 60px;
     width: auto;
     object-fit: contain;
+    flex-shrink: 0;
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-right: 0.5rem;
     flex-shrink: 0;
 }
 
@@ -191,15 +199,17 @@ section {
     flex-direction: column;
 }
 
-.logo-bimbel {
-    font-size: 0.5em;
-    font-weight: 400;
-    color: var(--color-text);
+.tulisan-edumag {
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--color-dark);
+    line-height: 1.1;
 }
 
-.logo-edumag {
-    font-size: 1em;
+.tulisan-edumag:last-child {
+    font-size: 1.4em;
     color: var(--color-dark);
+    font-weight: 800;
 }
 
 /* --- Media Queries (Mobile First) --- */
@@ -236,6 +246,102 @@ section {
 
 .nav-links a:hover::after {
     width: 100%;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-dark);
+    transition: all var(--transition-speed);
+    transform-origin: center;
+}
+
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-speed), visibility var(--transition-speed);
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100%;
+    background-color: var(--color-white);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: right var(--transition-speed);
+    padding: 5rem 2rem 2rem;
+    overflow-y: auto;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mobile-menu .nav-links a {
+    color: var(--color-dark);
+    font-weight: 600;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-light);
+    margin-left: 0;
+}
+
+.mobile-menu .nav-links a:hover {
+    color: var(--color-primary);
+}
+
+.mobile-menu .btn {
+    margin-top: 2rem;
+    width: 100%;
+    text-align: center;
 }
 
 .floating-cta {
@@ -718,6 +824,13 @@ section {
 
 
 /* --- Media Queries (Mobile First) --- */
+
+/* Mobile (below 768px) */
+@media (max-width: 767px) {
+    .hamburger {
+        display: flex;
+    }
+}
 
 /* Tablet (768px) */
 @media (min-width: 768px) {

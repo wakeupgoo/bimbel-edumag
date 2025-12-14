@@ -5,18 +5,18 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const DATA_URL = 'data/index.json';
-    const WA_NUMBER = '+6285134913931';
-    const WA_MESSAGE = 'Halo Admin Bimbel Edumag, saya ingin konsultasi belajar.';
 
     // --- Utility Functions ---
 
     /**
      * Generates the full WhatsApp link with pre-filled message.
+     * @param {string} number - The WhatsApp number.
+     * @param {string} message - The pre-filled message.
      * @returns {string} The complete WhatsApp URL.
      */
-    const generateWhatsAppLink = () => {
-        const encodedMessage = encodeURIComponent(WA_MESSAGE);
-        return `https://wa.me/${WA_NUMBER.replace(/\+/g, '')}?text=${encodedMessage}`;
+    const generateWhatsAppLink = (number, message) => {
+        const encodedMessage = encodeURIComponent(message);
+        return `https://wa.me/${number.replace(/\+/g, '')}?text=${encodedMessage}`;
     };
 
     /**
@@ -65,9 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     const createUSPTemplate = (usp) => `
         <div class="usp-card">
-            <i class="${usp.icon} icon-usp"></i>
-            <h3>${usp.title}</h3>
-            <p>${usp.description}</p>
+            <i class="fa-solid fa-star icon-usp"></i>
+            <h3>${usp}</h3>
         </div>
     `;
 
@@ -121,20 +120,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            const waLink = generateWhatsAppLink();
+            const waLink = generateWhatsAppLink(data.whatsapp.number, data.whatsapp.message);
 
             // 1. Render Brand & Hero Content
-            updateElement('brand-name', 'text', data.brand.name);
-            updateElement('hero-title', 'text', data.hero.title);
-            updateElement('hero-subtitle', 'text', data.hero.subtitle);
-            updateElement('about-title', 'text', data.about.title);
-            updateElement('about-desc', 'text', data.about.description);
+            updateElement('brand-name', 'text', `${data.brand.name} - ${data.brand.tagline}`);
+            updateElement('brand-tagline', 'text', data.brand.tagline);
+            updateElement('hero-title', 'text', data.brand.name);
+            updateElement('hero-subtitle', 'text', data.brand.tagline);
+            updateElement('about-title', 'text', `Mengapa ${data.brand.name} Adalah Pilihan Tepat?`);
+            updateElement('about-desc', 'text', data.brand.description);
             updateElement('pricing-info', 'html', `Mulai dari <span class="price">${data.pricing.min_price}</span> . ${data.pricing.description}`);
             updateElement('cta-bottom-title', 'text', data.cta_bottom.title);
             updateElement('cta-bottom-subtitle', 'text', data.cta_bottom.subtitle);
 
             // 2. Render Lists
-            renderList(data.usps, '[data-js-hook="usp-list"]', createUSPTemplate);
+            renderList(data.keunggulan, '[data-js-hook="usp-list"]', createUSPTemplate);
             renderList(data.programs, '[data-js-hook="program-list"]', createProgramTemplate);
             renderList(data.testimonials, '[data-js-hook="testimonial-list"]', createTestimonialTemplate);
             renderList(data.faq, '[data-js-hook="faq-list"]', createFAQTemplate);
@@ -142,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 3. Render WhatsApp CTAs
             updateElement('whatsapp-cta', 'href', waLink);
             updateElement('whatsapp-cta-float', 'href', waLink);
+            updateElement('whatsapp-number', 'text', data.whatsapp.number);
 
             // 4. Initialize UI Interactions
             initFAQAccordion();
@@ -151,8 +152,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Failed to load or process index data:', error);
             // Fallback for critical CTAs if data load fails
-            updateElement('whatsapp-cta', 'href', generateWhatsAppLink());
-            updateElement('whatsapp-cta-float', 'href', generateWhatsAppLink());
+            const fallbackLink = generateWhatsAppLink('+6285134913931', 'Halo Admin Bimbel Edumag, saya ingin konsultasi belajar.');
+            updateElement('whatsapp-cta', 'href', fallbackLink);
+            updateElement('whatsapp-cta-float', 'href', fallbackLink);
         }
     };
 
@@ -240,8 +242,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // --- UI Interactions ---
+
+    /**
+     * Initializes the hamburger menu toggle functionality.
+     */
+    const initHamburgerMenu = () => {
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+
+        if (!hamburger || !mobileMenu || !mobileMenuOverlay) return;
+
+        const toggleMenu = () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        };
+
+        hamburger.addEventListener('click', toggleMenu);
+        mobileMenuOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking on a link
+        mobileMenu.addEventListener('click', (event) => {
+            if (event.target.tagName === 'A') {
+                toggleMenu();
+            }
+        });
+    };
+
     // --- Execution ---
     initContent();
+    initHamburgerMenu();
 });
 
 // Blog specific JS (optional, but good practice for modularity)

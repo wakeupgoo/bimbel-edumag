@@ -1,42 +1,38 @@
 {
     "brand": {
-        "name": "Bimbel Edumag",
-        "tagline": "Belajar jadi lebih mudah dan menyenangkan"
+        "name": "Edumag",
+        "tagline": "Belajar jadi mudah dan menyenangkan",
+        "description": "Edumag adalah bimbel inovatif yang menggabungkan pembelajaran akademik, pengembangan karakter, dan kesadaran sosial melalui pendekatan aktif, kontekstual, dan bermakna."
     },
+    "filosofi": {
+        "metode": "Edumag MasterKey",
+        "breakdown": {
+            "Engage": "Pembelajaran aktif, seru, dan menarik",
+            "Discover": "Siswa menemukan konsep melalui eksplorasi dan analisis",
+            "Understand": "Pemahaman mendalam yang terhubung dengan konteks nyata",
+            "Mindset": "Penguatan pola pikir kritis, reflektif, dan empatik",
+            "Apply & Grow": "Aplikasi ilmu dalam kehidupan nyata untuk pertumbuhan berkelanjutan"
+        }
+    },
+    "keunggulan": [
+        "Pembelajaran aktif, kontekstual, dan transformatif",
+        "Fokus pada karakter dan kecerdasan sosial, bukan hanya akademik",
+        "Materi relevan dengan kehidupan nyata",
+        "Budaya belajar yang menyenangkan dan memotivasi",
+        "Metode Edumag MasterKey yang scalable dan adaptif lintas mata pelajaran"
+    ],
+    "visi": "Membentuk generasi muda Indonesia yang berpikir kritis, berkarakter sosial, dan terus bertumbuh melalui pembelajaran bermakna.",
+    "misi": [
+        "Mengimplementasikan Edumag MasterKey di seluruh proses belajar",
+        "Mendorong pembelajaran berbasis cerita, observasi, dan refleksi nilai",
+        "Mengembangkan kecerdasan akademik, karakter, dan sosial siswa",
+        "Menumbuhkan budaya belajar yang relevan, kreatif, dan menyenangkan",
+        "Menghubungkan ilmu dengan kehidupan nyata"
+    ],
     "whatsapp": {
         "number": "+6285134913931",
         "message": "Halo Admin Bimbel Edumag, saya ingin konsultasi belajar."
     },
-    "hero": {
-        "title": "Kuasai Materi, Raih Prestasi dengan Edumag MasterKey",
-        "subtitle": "Bimbingan Belajar Inovatif untuk SD, SMP, dan SMA. Fokus pada pengembangan diri dan hasil nyata."
-    },
-    "about": {
-        "title": "Mengapa Edumag Adalah Pilihan Tepat?",
-        "description": "Kami hadir bukan hanya untuk mentransfer ilmu, tapi untuk membentuk mental juara. Metode Edumag MasterKey kami dirancang untuk membuat belajar menjadi pengalaman yang interaktif, menantang, dan sangat menyenangkan. Kami percaya pada kualitas, bukan kuantitas."
-    },
-    "usps": [
-        {
-            "icon": "fa-solid fa-lightbulb",
-            "title": "Bimbel Berorientasi Siswa",
-            "description": "Kurikulum adaptif yang menyesuaikan kecepatan belajar tiap individu. Siswa adalah fokus utama kami."
-        },
-        {
-            "icon": "fa-solid fa-key",
-            "title": "Metode Edumag MasterKey",
-            "description": "Pendekatan belajar unik yang menggabungkan teori mendalam, latihan terstruktur, dan pemecahan masalah kreatif."
-        },
-        {
-            "icon": "fa-solid fa-users",
-            "title": "Kelas Maksimal 13 Siswa",
-            "description": "Fokus pengajar maksimal dengan kelas kecil, menjamin perhatian personal dan interaksi intensif."
-        },
-        {
-            "icon": "fa-solid fa-handshake-angle",
-            "title": "Program Pengembangan Diri",
-            "description": "Sesi pengembangan soft skill dan karakter setiap semester untuk kesiapan masa depan."
-        }
-    ],
     "programs": [
         {
             "icon": "fa-solid fa-book-open-reader",
