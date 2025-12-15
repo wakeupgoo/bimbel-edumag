@@ -1,6 +1,6 @@
 /**
  * main.js - Vanilla JavaScript for Bimbel Edumag
- * Functions: Fetch JSON, Render Content, Sticky Nav, Scroll Reveal, FAQ Accordion, WhatsApp Link Generation
+ * Functions: Fetch JSON, Render Content, Sticky Nav, Scroll Reveal, FAQ Accordion, WhatsApp Link Generation, Popup
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,23 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Utility Functions ---
 
-    /**
-     * Generates the full WhatsApp link with pre-filled message.
-     * @param {string} number - The WhatsApp number.
-     * @param {string} message - The pre-filled message.
-     * @returns {string} The complete WhatsApp URL.
-     */
     const generateWhatsAppLink = (number, message) => {
         const encodedMessage = encodeURIComponent(message);
         return `https://wa.me/${number.replace(/\+/g, '')}?text=${encodedMessage}`;
     };
 
-    /**
-     * Finds elements by data-js-hook and updates their content or attributes.
-     * @param {string} hookName - The value of the data-js-hook attribute.
-     * @param {string} type - 'text', 'html', 'href', or 'icon'.
-     * @param {string} content - The content or attribute value.
-     */
     const updateElement = (hookName, type, content) => {
         const elements = document.querySelectorAll(`[data-js-hook="${hookName}"]`);
         elements.forEach(el => {
@@ -45,14 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- JSON Fetching & Rendering ---
-
-    /**
-     * Renders a list of items (e.g., USP, Programs) into a specified container.
-     * @param {Array<Object>} items - Array of data objects.
-     * @param {string} containerSelector - Selector for the HTML container.
-     * @param {Function} templateFunction - Function to generate the HTML for a single item.
-     */
     const renderList = (items, containerSelector, templateFunction) => {
         const container = document.querySelector(containerSelector);
         if (container) {
@@ -60,9 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    /**
-     * HTML template for a USP item.
-     */
     const createUSPTemplate = (usp) => `
         <div class="usp-card">
             <i class="fa-solid fa-star icon-usp"></i>
@@ -70,9 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    /**
-     * HTML template for a Program item.
-     */
     const createProgramTemplate = (program) => `
         <div class="program-card">
             <i class="${program.icon} icon-program"></i>
@@ -81,9 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    /**
-     * HTML template for a Testimonial item.
-     */
     const createTestimonialTemplate = (t) => `
         <div class="testimonial-card">
             <i class="${t.icon}"></i>
@@ -95,9 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    /**
-     * HTML template for an FAQ item.
-     */
     const createFAQTemplate = (faq, index) => `
         <div class="faq-item" data-index="${index}">
             <button class="faq-question" data-js-hook="faq-toggle">
@@ -110,19 +78,31 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    /**
-     * Fetches the main data and initializes content rendering.
-     */
+    // --- Popup (Global) ---
+    const initPopup = () => {
+        const popup = document.getElementById("popupOverlay");
+        if (!popup) return;
+
+        if (!sessionStorage.getItem("popupShown")) {
+            popup.style.display = "flex";
+            sessionStorage.setItem("popupShown", "true");
+        }
+    };
+
+    window.closePopup = () => {
+        const popup = document.getElementById("popupOverlay");
+        if (popup) popup.style.display = "none";
+    };
+
+    // --- JSON Fetching & Rendering ---
     const initContent = async () => {
         try {
             const response = await fetch(DATA_URL);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
             const waLink = generateWhatsAppLink(data.whatsapp.number, data.whatsapp.message);
 
-            // 1. Render Brand & Hero Content
+            // Brand & Hero
             updateElement('brand-name', 'text', `${data.brand.name} - ${data.brand.tagline}`);
             updateElement('brand-tagline', 'text', data.brand.tagline);
             updateElement('hero-title', 'text', data.brand.name);
@@ -135,13 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
             updateElement('cta-bottom-title', 'text', data.cta_bottom.title);
             updateElement('cta-bottom-subtitle', 'text', data.cta_bottom.subtitle);
 
-            // 2. Render Lists
+            // Lists
             renderList(data.keunggulan, '[data-js-hook="usp-list"]', createUSPTemplate);
             renderList(data.programs, '[data-js-hook="program-list"]', createProgramTemplate);
             renderList(data.testimonials, '[data-js-hook="testimonial-list"]', createTestimonialTemplate);
             renderList(data.faq, '[data-js-hook="faq-list"]', createFAQTemplate);
 
-            // 3. Render MasterKey section
+            // MasterKey
             const masterkeyList = document.querySelector('[data-js-hook="masterkey-list"]');
             if (masterkeyList && data.masterkey) {
                 masterkeyList.innerHTML = data.masterkey.map((item, index) => `
@@ -153,30 +133,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 `).join('');
             }
 
-            // 4. Render Visi & Misi section
+            // Visi & Misi
             const visiText = document.querySelector('[data-js-hook="visi-text"]');
-            if (visiText && data.visi) {
-                visiText.textContent = data.visi;
-            }
-
+            if (visiText && data.visi) visiText.textContent = data.visi;
             const misiList = document.querySelector('[data-js-hook="misi-list"]');
             if (misiList && data.misi) {
                 misiList.innerHTML = data.misi.map(item => `<li>${item}</li>`).join('');
             }
 
-            // 3. Render WhatsApp CTAs
+            // WhatsApp CTAs
             updateElement('whatsapp-cta', 'href', waLink);
             updateElement('whatsapp-cta-float', 'href', waLink);
             updateElement('whatsapp-number', 'text', data.whatsapp.number);
 
-            // 4. Initialize UI Interactions
+            // UI Interactions
             initFAQAccordion();
             initStickyNavbar();
             initScrollReveal();
 
         } catch (error) {
             console.error('Failed to load or process index data:', error);
-            // Fallback for critical CTAs if data load fails
             const fallbackLink = generateWhatsAppLink('+6285134913931', 'Halo Admin Bimbel Edumag, saya ingin konsultasi belajar.');
             updateElement('whatsapp-cta', 'href', fallbackLink);
             updateElement('whatsapp-cta-float', 'href', fallbackLink);
@@ -184,10 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- UI Interactions ---
-
-    /**
-     * Initializes the FAQ accordion functionality.
-     */
     const initFAQAccordion = () => {
         const faqList = document.querySelector('[data-js-hook="faq-list"]');
         if (!faqList) return;
@@ -202,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const isOpen = faqItem.classList.contains('active');
 
-            // Close all first (optional: keep open for multiple)
             document.querySelectorAll('.faq-item.active').forEach(item => {
                 if (item !== faqItem) {
                     item.classList.remove('active');
@@ -211,101 +182,64 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Toggle current item
             if (isOpen) {
                 faqItem.classList.remove('active');
                 answer.style.maxHeight = null;
                 icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
             } else {
                 faqItem.classList.add('active');
-                answer.style.maxHeight = answer.scrollHeight + "px"; // Dynamic height
+                answer.style.maxHeight = answer.scrollHeight + "px";
                 icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
             }
         });
     };
 
-
-    /**
-     * Initializes the sticky navbar functionality.
-     */
     const initStickyNavbar = () => {
         const navbar = document.querySelector('.navbar');
         if (!navbar) return;
 
         const handleScroll = () => {
-            // Cek apakah posisi scroll lebih dari 50px
-            if (window.scrollY > 50) {
-                navbar.classList.add('sticky');
-            } else {
-                navbar.classList.remove('sticky');
-            }
+            if (window.scrollY > 50) navbar.classList.add('sticky');
+            else navbar.classList.remove('sticky');
         };
-
         window.addEventListener('scroll', handleScroll);
-        // Initial check
         handleScroll();
     };
 
-
-    /**
-     * Initializes basic Scroll Reveal functionality using the 'in-view' class.
-     */
     const initScrollReveal = () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('in-view');
-                    observer.unobserve(entry.target); // Stop observing once revealed
+                    observer.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.1 // Reveal when 10% of element is visible
-        });
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('[data-js-hook="scroll-reveal"]').forEach(element => {
-            observer.observe(element);
-        });
+        document.querySelectorAll('[data-js-hook="scroll-reveal"]').forEach(element => observer.observe(element));
     };
 
-    // --- UI Interactions ---
-
-    /**
-     * Initializes the hamburger menu toggle functionality.
-     */
     const initHamburgerMenu = () => {
         const hamburger = document.querySelector('.hamburger');
         const mobileMenu = document.querySelector('.mobile-menu');
         const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-
         if (!hamburger || !mobileMenu || !mobileMenuOverlay) return;
 
         const toggleMenu = () => {
             hamburger.classList.toggle('active');
             mobileMenu.classList.toggle('active');
             mobileMenuOverlay.classList.toggle('active');
-
-            // Prevent body scroll when menu is open
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         };
 
         hamburger.addEventListener('click', toggleMenu);
         mobileMenuOverlay.addEventListener('click', toggleMenu);
-
-        // Close menu when clicking on a link
         mobileMenu.addEventListener('click', (event) => {
-            if (event.target.tagName === 'A') {
-                toggleMenu();
-            }
+            if (event.target.tagName === 'A') toggleMenu();
         });
     };
 
-    // --- Execution ---
-    initContent();
-    initHamburgerMenu();
-});
-
-// Blog specific JS (optional, but good practice for modularity)
-document.addEventListener('DOMContentLoaded', () => {
+    // --- Blog Page Logic (Conditional) ---
     if (document.body.classList.contains('page-blog')) {
         const BLOG_DATA_URL = 'data/blog.json';
 
@@ -314,9 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="card-thumbnail" style="background-image: url('assets/images/${article.thumbnail}');"></div>
                 <div class="card-content">
                     <span class="card-category"><i class="fa-solid fa-tag"></i> ${article.category}</span>
-                    <a href="#${article.slug}" class="card-title-link">
-                        <h3>${article.title}</h3>
-                    </a>
+                    <a href="#${article.slug}" class="card-title-link"><h3>${article.title}</h3></a>
                     <p class="card-excerpt">${article.excerpt}</p>
                     <div class="card-meta">
                         <span><i class="fa-solid fa-calendar-alt"></i> ${article.date}</span>
@@ -337,18 +269,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const articles = await response.json();
 
                 container.innerHTML = articles.map(createBlogCardTemplate).join('');
-
-                // Re-init scroll reveal for the newly rendered cards
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('in-view');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1 });
-
                 document.querySelectorAll('.blog-card').forEach(element => {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('in-view');
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, { threshold: 0.1 });
                     observer.observe(element);
                 });
 
@@ -360,4 +289,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderBlogList();
     }
+
+    // --- Execution ---
+    initPopup();
+    initContent();
+    initHamburgerMenu();
 });
