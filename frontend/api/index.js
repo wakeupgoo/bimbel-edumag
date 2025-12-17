@@ -10,10 +10,11 @@ const connectDB = async () => {
         return;
     }
     await mongoose.connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
         family: 4,
-        maxPoolSize: 1,
-        serverSelectionTimeoutMS: 5000,
-        bufferCommands: false
+        serverSelectionTimeoutMS: 15000,
+        heartbeatFrequencyMS: 1000,
     });
 };
 
