@@ -19,6 +19,10 @@ const connectDB = async () => {
 
 // Ensure the handler is an async function and await the connection
 module.exports = async (req, res) => {
-    await connectDB();
-    app(req, res);
+    try {
+        await connectDB();
+        app(req, res);
+    } catch (err) {
+        res.status(500).json({ error: err.message, stack: err.stack });
+    }
 };
