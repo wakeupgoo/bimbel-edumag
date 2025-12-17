@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const app = require('../backend/src/app');
+const app = require('../../backend/src/app');
 
 // Gunakan variabel global agar koneksi tidak dibuat berulang-ulang (Re-use connection)
 let isConnected = false;
