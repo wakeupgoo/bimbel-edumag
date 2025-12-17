@@ -2,23 +2,23 @@
   "version": 2,
   "builds": [
     {
-      "src": "frontend/api/index.js",
+      "src": "api/index.js",
       "use": "@vercel/node"
     },
     {
-      "src": "frontend/**",
+      "src": "**",
       "use": "@vercel/static"
     }
   ],
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/frontend/api/index.js"
+      "destination": "/api/index.js"
     },
     {
       "source": "/(.*)",
-      "destination": "/frontend/$1"
+      "destination": "/$1"
     }
   ],
-  "outputDirectory": "frontend"
+  "outputDirectory": "."
 }
