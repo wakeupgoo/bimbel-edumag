@@ -1,6 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const app = require('../../backend/src/app');
+const app = require('./app');
 
 // Declare a let variable cachedDb = null outside the main handler
 let cachedDb = null;
