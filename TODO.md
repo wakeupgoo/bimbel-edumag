@@ -1,5 +1,8 @@
-# TODO List for Fixing Vercel 500 Error
-
-- [x] Edit frontend/api/index.js to update MongoDB connection options
-- [x] Delete frontend/vercel.json
-- [x] Push changes to git repository
+- [x] Remove backend/ and frontend/api/ folders
+- [ ] Update api/index.js: Remove dotenv, async wrapper, export app directly
+- [ ] Update api/db.js: Use global.mongoose cache
+- [ ] Update package.json: Remove dotenv and nodemon
+- [ ] Verify vercel.json (no changes needed)
+- [ ] Show final folder structure
+- [ ] Show final file contents
+- [ ] Provide deploy checklist
