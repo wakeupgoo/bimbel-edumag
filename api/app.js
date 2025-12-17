@@ -1,6 +1,10 @@
 const express = require('express');
 const cors = require('cors');
+const connectDB = require('./db');
 const reportRoutes = require('./routes/report.routes');
+
+// Connect to MongoDB
+connectDB();
 
 const app = express();
 
