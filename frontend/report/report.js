@@ -16,7 +16,7 @@ async function cariLaporan() {
 
     try {
         // Panggil API Backend kita
-        const response = await fetch(`http://localhost:3000/api/reports/token/${token}`);
+        const response = await fetch(`/api/reports/token/${token}`);
         const result = await response.json();
 
         if (response.ok) {
