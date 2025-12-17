@@ -1,19 +1,24 @@
 {
   "name": "webedumag",
   "version": "1.0.0",
-  "description": "Web EduMag project",
+  "description": "Bimbel Edumag - Monorepo for Vercel",
   "main": "api/index.js",
   "scripts": {
     "dev": "vercel dev",
-    "build": "echo 'No build needed for static + serverless'",
-    "start": "vercel dev"
+    "build": "echo 'Build complete'",
+    "start": "node api/index.js"
   },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "mongoose": "^7.6.3"
+  "engines": {
+    "node": "24.x"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.0.1"
+  }
 }

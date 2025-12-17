@@ -1,26 +1,36 @@
-# Production Readiness Fixes TODO
+- [ ] Analyze current project structure
+- [ ] Create restructuring plan
 
-## 1. Update MongoDB Connection (api/db.js)
-- [x] Replace `let cachedDb = null;` with `global.mongoose` cache
-- [x] Implement conn + promise pattern
-- [x] Ensure anti-reconnect storm protection
+## Pending Tasks
+- [ ] Restructure folders: Move root frontend files to frontend/ folder
+- [ ] Move backend/src contents to api/ folder and adapt for serverless
+- [ ] Remove old backend/ folder
+- [ ] Create root package.json with consolidated dependencies and Node 24.x engine
+- [ ] Update vercel.json for new structure
+- [ ] Change API URL in frontend/report/report.js to use environment variable
+- [ ] Implement cached MongoDB connection in api/db.js
+- [ ] Create .env.example with required variables
+- [ ] Ensure .gitignore includes .env
+- [ ] Create api/index.js as serverless entry point
+- [ ] Update routes and controllers for serverless compatibility
+- [ ] Test locally with vercel dev
+- [ ] Deploy to Vercel
+=======
+## Completed Tasks
+- [x] Analyze current project structure
+- [x] Create restructuring plan
+- [x] Restructure folders: Move root frontend files to frontend/ folder
+- [x] Move backend/src contents to api/ folder and adapt for serverless
+- [x] Remove old backend/ folder
+- [x] Create root package.json with consolidated dependencies and Node 24.x engine
+- [x] Update vercel.json for new structure
+- [x] Change API URL in frontend/report/report.js to use environment variable
+- [x] Implement cached MongoDB connection in api/db.js
+- [x] Create .env.example with required variables
+- [x] Ensure .gitignore includes .env
+- [x] Create api/index.js as serverless entry point
+- [x] Update routes and controllers for serverless compatibility
 
-## 2. Update Database Initialization (api/app.js)
-- [x] Import `connectDB` from `./db`
-- [x] Call `connectDB()` at the top, before routes
-- [x] Remove the `app.get('/')` route
-
-## 3. Repo Cleanup
-- [ ] Delete `frontend/package.json`
-- [ ] Delete `frontend/package-lock.json`
-- [ ] Delete `assets copy/` folder
-
-## 4. Final Validation
-- [x] Ensure `/api/health` endpoint works
-- [x] Ensure report endpoints work
-- [x] Confirm frontend fetches to `/api/*`
-
-## Followup
-- [ ] List final folder structure
-- [ ] Show final contents of `api/db.js` and `api/app.js`
-- [ ] Provide deploy checklist
+## Pending Tasks
+- [ ] Test locally with vercel dev
+- [ ] Deploy to Vercel
