@@ -2,47 +2,23 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const app = require('../../backend/src/app');
 
-// Disable buffering to avoid timeouts in serverless
-mongoose.set('bufferCommands', false);
-
-// Gunakan variabel global agar koneksi tidak dibuat berulang-ulang (Re-use connection)
-let isConnected = false;
+// Declare a let variable cachedDb = null outside the main handler
+let cachedDb = null;
 
 const connectDB = async () => {
-    console.log('🔍 Checking MongoDB connection...');
-    console.log('MONGO_URI exists:', !!process.env.MONGO_URI);
-    console.log('Current readyState:', mongoose.connection.readyState);
-
-    if (isConnected && mongoose.connection.readyState === 1) {
-        console.log('✅ Using existing MongoDB connection');
+    if (mongoose.connection.readyState >= 1) {
         return;
     }
-
-    try {
-        console.log('🔄 Attempting to connect to MongoDB...');
-        await mongoose.connect(process.env.MONGO_URI, {
-            serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-        });
-        isConnected = true;
-        console.log('✅ Connected to MongoDB successfully');
-    } catch (err) {
-        console.error('❌ MongoDB Connection Error:', err.message);
-        console.error('Full error:', err);
-        throw err; // Re-throw to handle in middleware
-    }
+    await mongoose.connect(process.env.MONGO_URI, {
+        family: 4,
+        maxPoolSize: 1,
+        serverSelectionTimeoutMS: 5000,
+        bufferCommands: false
+    });
 };
 
-// Middleware untuk memastikan koneksi sebelum memproses request
-app.use(async (req, res, next) => {
-    try {
-        console.log(`📡 ${req.method} ${req.path} - Connecting to DB...`);
-        await connectDB();
-        console.log(`✅ ${req.method} ${req.path} - DB connected, proceeding...`);
-        next();
-    } catch (err) {
-        console.error(`❌ ${req.method} ${req.path} - DB connection failed:`, err.message);
-        res.status(500).json({ error: 'Database connection failed', details: err.message });
-    }
-});
-
-module.exports = app;
+// Ensure the handler is an async function and await the connection
+module.exports = async (req, res) => {
+    await connectDB();
+    app(req, res);
+};
