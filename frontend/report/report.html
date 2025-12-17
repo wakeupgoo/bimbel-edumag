@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Laporan Siswa</title>
+    <link rel="stylesheet" href="report.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Laporan Perkembangan Siswa</h1>
+
+        <div class="search-box">
+            <input type="text" id="tokenInput" placeholder="Masukkan Token Siswa (Contoh: TOKEN123)">
+            <button onclick="cariLaporan()">Cek Laporan</button>
+        </div>
+
+        <div id="hasilLaporan" class="hidden">
+            <div class="info-siswa">
+                <p>Nama Siswa: <span id="namaSiswa"></span></p>
+                <p>Kelas: <span id="kelasSiswa"></span></p>
+            </div>
+
+            <table id="tabelLaporan">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Materi</th>
+                        <th>Kehadiran</th>
+                        <th>Catatan</th>
+                    </tr>
+                </thead>
+                <tbody id="isiTabel">
+                </tbody>
+            </table>
+
+            <button onclick="window.print()" class="btn-print">Cetak Laporan (PDF)</button>
+        </div>
+
+        <p id="pesanError" class="error"></p>
+    </div>
+
+    <script src="report.js"></script>
+</body>
+
+</html>
