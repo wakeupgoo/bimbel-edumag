@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const reportRoutes = require('./routes/report.routes'); // 1. Impor route yang kita buat
+const reportRoutes = require('../../api/routes/report.routes'); // 1. Impor route yang kita buat
 
 const app = express();
 

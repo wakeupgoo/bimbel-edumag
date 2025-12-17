@@ -1,38 +1,14 @@
-- [x] Analyze current project structure
-- [x] Create restructuring plan
-- [x] Restructure folders: Move root frontend files to frontend/ folder
-- [x] Move backend/src contents to api/ folder and adapt for serverless
-- [x] Remove old backend/ folder
-- [x] Create root package.json with consolidated dependencies and Node 24.x engine
-- [x] Update vercel.json for new structure
-- [x] Change API URL in frontend/report/report.js to use environment variable
-- [x] Implement cached MongoDB connection in api/db.js
-- [x] Create .env.example with required variables
-- [x] Ensure .gitignore includes .env
-- [x] Create api/index.js as serverless entry point
-- [x] Update routes and controllers for serverless compatibility
+# TODO: Fix Broken UI, Restore Missing Assets & Re-align Paths
 
-## Pending Tasks
-- [ ] Test locally with vercel dev
-- [ ] Deploy to Vercel
-=======
-## Completed Tasks
-- [x] Analyze current project structure
-- [x] Create restructuring plan
-- [x] Restructure folders: Move root frontend files to frontend/ folder
-- [x] Move backend/src contents to api/ folder and adapt for serverless
-- [x] Remove old backend/ folder
-- [x] Create root package.json with consolidated dependencies and Node 24.x engine
-- [x] Update vercel.json for new structure
-- [x] Change API URL in frontend/report/report.js to use environment variable
-- [x] Implement cached MongoDB connection in api/db.js
-- [x] Create .env.example with required variables
-- [x] Ensure .gitignore includes .env
-- [x] Create api/index.js as serverless entry point
-- [x] Update routes and controllers for serverless compatibility
-- [x] Create missing models and controllers
-- [x] Update all file paths and links
+## Tasks
+- [x] Fix CSS path in frontend/admin/admin-login.html: change "../../css/style.css" to "../css/style.css"
+- [x] Add "cleanUrls": true to vercel.json for better routing
+- [x] Audit and ensure images in frontend/assets/images/ are correctly referenced (already checked, paths are correct)
+- [x] Check if frontend/report/report.html needs shared CSS link to ../css/style.css for consistency
+- [ ] Test paths and UI after changes
 
-## Pending Tasks
-- [ ] Test locally with vercel dev
-- [ ] Deploy to Vercel
+## Status
+- Images are already in frontend/assets/images/ and paths in index.html and blog.html are correct.
+- admin-login.html CSS path fixed.
+- vercel.json updated with cleanUrls.
+- report.html updated with shared CSS link.
