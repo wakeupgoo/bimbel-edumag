@@ -16,14 +16,6 @@
       "destination": "/backend/server.js"
     },
     {
-      "source": "/report/(.*)",
-      "destination": "/frontend/report/$1"
-    },
-    {
-      "source": "/admin/(.*)",
-      "destination": "/frontend/admin/$1"
-    },
-    {
       "source": "/(.*)",
       "destination": "/frontend/$1"
     }
