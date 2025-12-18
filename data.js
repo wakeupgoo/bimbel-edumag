@@ -1,9 +1,8 @@
-// Mock data for static frontend version
-// Students: array of student objects
-let students = JSON.parse(localStorage.getItem('students')) || [];
-
-// Reports: array of report objects
-let reports = JSON.parse(localStorage.getItem('reports')) || [];
+// Jika ingin data permanen, masukkan hasil copy JSON ke dalam tanda [] di bawah ini
+let initialStudents = [];
+let initialReports = [];
+let students = JSON.parse(localStorage.getItem('students')) || initialStudents;
+let reports = JSON.parse(localStorage.getItem('reports')) || initialReports;
 
 // Admin accounts (for completeness, though login is hardcoded)
 const admins = [

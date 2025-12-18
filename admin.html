@@ -158,6 +158,50 @@
             font-size: 0.85rem;
             font-weight: bold;
         }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 12px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 
@@ -235,6 +279,17 @@
                     <tbody id="reportList"></tbody>
                 </table>
             </div>
+            <button type="button" id="exportBtn" class="btn-primary" style="margin-top: 20px; width: auto;">Salin Data JSON</button>
+        </div>
+    </div>
+
+    <!-- Modal for JSON Export -->
+    <div id="exportModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Salin Data JSON</h2>
+            <p>Salin data di bawah ini dan tempelkan ke dalam file data.js untuk data permanen:</p>
+            <textarea id="jsonData" readonly></textarea>
         </div>
     </div>
 
@@ -372,6 +427,26 @@
                 fetchStudents(); // Refresh dropdown siswa
             } else {
                 alert("Gagal daftarkan siswa: " + result.error);
+            }
+        });
+
+        // 8. Export Data JSON
+        document.getElementById('exportBtn').addEventListener('click', () => {
+            const studentsData = localStorage.getItem('students');
+            const reportsData = localStorage.getItem('reports');
+            const jsonData = `let initialStudents = ${studentsData || '[]'};\nlet initialReports = ${reportsData || '[]'};`;
+            document.getElementById('jsonData').value = jsonData;
+            document.getElementById('exportModal').style.display = 'block';
+        });
+
+        // Modal close functionality
+        document.getElementsByClassName('close')[0].addEventListener('click', () => {
+            document.getElementById('exportModal').style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == document.getElementById('exportModal')) {
+                document.getElementById('exportModal').style.display = 'none';
             }
         });
 
