@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateElement('brand-tagline', 'text', data.brand.tagline);
             updateElement('hero-title', 'text', data.brand.name);
             updateElement('hero-subtitle', 'text', data.brand.tagline);
-            updateElement('about-title', 'text', `Mengapa ${data.brand.name} Adalah Pilihan Tepat?`);
+            updateElement('about-title', 'text', `Mengapa Bimbel Edumag Adalah Pilihan Tepat?`);
             updateElement('about-desc', 'text', data.brand.description);
             updateElement('masterkey-title', 'text', 'Edumag MasterKey');
             updateElement('masterkey-subtitle', 'text', 'Metode pembelajaran inovatif yang mengubah cara siswa belajar');
