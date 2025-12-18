@@ -1,6 +1,6 @@
 // Jika ingin data permanen, masukkan hasil copy JSON ke dalam tanda [] di bawah ini
-let initialStudents = [];
-let initialReports = [];
+let initialStudents = [{"_id":"1766046583828ej2i2i752","nama":"Celine","kelas":"8-A","reportToken":"9229"},{"_id":"1766046652376ekveejsfg","nama":"Nur Zahra","kelas":"8-A","reportToken":"1577"},{"_id":"1766046662010q0x8ae2dy","nama":"Renata","kelas":"8-A","reportToken":"6883"},{"_id":"1766046668664s2v6dqu3v","nama":"Chen","kelas":"7-A","reportToken":"4264"},{"_id":"17660466791500ua2zgpoo","nama":"Afdhal","kelas":"7-A","reportToken":"1399"},{"_id":"1766046690976o5f8sfstk","nama":"Nada","kelas":"9-A","reportToken":"9542"},{"_id":"17660467204931yv11p0az","nama":"Yara","kelas":"10-A","reportToken":"6298"}];
+let initialReports = [{"_id":"1766046744770mlijl250j","studentId":"17660467204931yv11p0az","tanggal":"2025-12-18T08:32:24.770Z","materi":"Basic Class - Aljabar","hadir":true,"catatan":"Yara anak yang cantik dan gemar membaca buku ","nilai":85}];
 
 // Clear old localStorage only once
 if (!localStorage.getItem('dataCleared')) { localStorage.clear(); localStorage.setItem('dataCleared', 'true'); }
@@ -12,28 +12,26 @@ let storedReports = JSON.parse(localStorage.getItem('reports'));
 // Untuk students: Jika localStorage kosong atau array kosong, gunakan initialStudents
 if (!storedStudents || storedStudents.length === 0) {
     students = initialStudents;
-    localStorage.setItem('students', JSON.stringify(initialStudents));
 } else {
     students = storedStudents;
-    // Auto-sync: Jika initialStudents lebih banyak, update localStorage
-    if (initialStudents.length > storedStudents.length) {
-        students = initialStudents;
-        localStorage.setItem('students', JSON.stringify(initialStudents));
-    }
 }
+// Auto-sync: Jika initialStudents lebih banyak, update localStorage
+if (initialStudents.length > students.length) {
+    students = initialStudents;
+}
+localStorage.setItem('students', JSON.stringify(students));
 
 // Untuk reports: Jika localStorage kosong atau array kosong, gunakan initialReports
 if (!storedReports || storedReports.length === 0) {
     reports = initialReports;
-    localStorage.setItem('reports', JSON.stringify(initialReports));
 } else {
     reports = storedReports;
-    // Auto-sync: Jika initialReports lebih banyak, update localStorage
-    if (initialReports.length > storedReports.length) {
-        reports = initialReports;
-        localStorage.setItem('reports', JSON.stringify(initialReports));
-    }
 }
+// Auto-sync: Jika initialReports lebih banyak, update localStorage
+if (initialReports.length > reports.length) {
+    reports = initialReports;
+}
+localStorage.setItem('reports', JSON.stringify(reports));
 
 // Admin accounts (for completeness, though login is hardcoded)
 const admins = [
