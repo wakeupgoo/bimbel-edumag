@@ -253,6 +253,29 @@
         <div id="reportsSection" class="reports-section">
             <h2 style="color: #1e40af; margin-bottom: 20px;"><i class="fa-solid fa-list"></i> Laporan Harian</h2>
             <div id="reportsList"></div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="printPdfBtn" class="pdf-btn" style="display: none;"><i class="fa-solid fa-file-pdf"></i> Cetak PDF</button>
+            </div>
+        </div>
+
+        <!-- Hidden PDF Content -->
+        <div id="pdfContent" class="pdf-content">
+            <div class="pdf-title">LAPORAN HASIL BELAJAR SISWA</div>
+            <div class="pdf-student-info">
+                <div class="pdf-student-name" id="pdfStudentName"></div>
+                <div class="pdf-student-class" id="pdfStudentClass"></div>
+            </div>
+            <table class="pdf-reports-table">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Materi Pembelajaran</th>
+                        <th>Status Kehadiran</th>
+                        <th>Catatan</th>
+                    </tr>
+                </thead>
+                <tbody id="pdfReportsTableBody"></tbody>
+            </table>
         </div>
 
         <div style="text-align: center;">
@@ -262,6 +285,7 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="data.js"></script>
     <script>
         document.getElementById('tokenForm').addEventListener('submit', function(e) {
@@ -338,6 +362,53 @@
             }
 
             reportsSection.style.display = 'block';
+
+            // Show PDF button and prepare PDF content
+            document.getElementById('printPdfBtn').style.display = 'block';
+            preparePdfContent(student, studentReports);
+        });
+
+        function preparePdfContent(student, reports) {
+            // Set student info in PDF
+            document.getElementById('pdfStudentName').textContent = `Nama Siswa: ${student.nama}`;
+            document.getElementById('pdfStudentClass').textContent = `Kelas: ${student.kelas}`;
+
+            // Populate PDF table
+            const tableBody = document.getElementById('pdfReportsTableBody');
+                tableBody.innerHTML = reports.map(report => {
+                    const date = new Date(report.tanggal).toLocaleDateString('id-ID', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    });
+                    const attendanceText = report.hadir ? 'Hadir' : 'Tidak Hadir';
+                    const notes = report.catatan || '-';
+
+                    return `
+                    <tr style="border: 1px solid #e2e8f0;">
+                        <td style="border: 1px solid #e2e8f0; padding: 10px;">${date}</td>
+                        <td style="border: 1px solid #e2e8f0; padding: 10px;">${report.materi}</td>
+                        <td style="border: 1px solid #e2e8f0; padding: 10px;">${attendanceText}</td>
+                        <td style="border: 1px solid #e2e8f0; padding: 10px;">${notes}</td>
+                    </tr>
+                `;
+                }).join('');
+        }
+
+        document.getElementById('printPdfBtn').addEventListener('click', function() {
+            const element = document.getElementById('pdfContent');
+            const studentName = document.getElementById('studentName').textContent;
+            const filename = `Laporan_${studentName.replace(/\s+/g, '_')}.pdf`;
+
+            const opt = {
+                margin: 0.5,
+                filename: filename,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
         });
     </script>
 </body>

@@ -1,81 +1,9 @@
 // Mock data for static frontend version
 // Students: array of student objects
-let students = JSON.parse(localStorage.getItem('students')) || [
-    {
-        _id: '1',
-        nama: 'Ahmad Fauzi',
-        kelas: '10-A',
-        reportToken: 'TOKEN123'
-    },
-    {
-        _id: '2',
-        nama: 'Siti Aminah',
-        kelas: '11-B',
-        reportToken: 'TOKEN456'
-    },
-    {
-        _id: '3',
-        nama: 'Budi Santoso',
-        kelas: '9-C',
-        reportToken: 'TOKEN789'
-    },
-    {
-        _id: '4',
-        nama: 'Dewi Lestari',
-        kelas: '12-A',
-        reportToken: 'TOKEN101'
-    },
-    {
-        _id: '5',
-        nama: 'Rizki Pratama',
-        kelas: '10-B',
-        reportToken: 'TOKEN202'
-    }
-];
+let students = JSON.parse(localStorage.getItem('students')) || [];
 
 // Reports: array of report objects
-let reports = JSON.parse(localStorage.getItem('reports')) || [
-    {
-        _id: 'r1',
-        studentId: '1',
-        tanggal: new Date().toISOString(),
-        materi: 'Matematika-Aljabar',
-        hadir: true,
-        catatan: 'Baik sekali'
-    },
-    {
-        _id: 'r2',
-        studentId: '2',
-        tanggal: new Date(Date.now() - 86400000).toISOString(), // Yesterday
-        materi: 'Bahasa Indonesia',
-        hadir: false,
-        catatan: 'Sakit'
-    },
-    {
-        _id: 'r3',
-        studentId: '3',
-        tanggal: new Date(Date.now() - 172800000).toISOString(), // 2 days ago
-        materi: 'Fisika',
-        hadir: true,
-        catatan: 'Perlu bimbingan lebih'
-    },
-    {
-        _id: 'r4',
-        studentId: '4',
-        tanggal: new Date(Date.now() - 259200000).toISOString(), // 3 days ago
-        materi: 'Kimia',
-        hadir: true,
-        catatan: ''
-    },
-    {
-        _id: 'r5',
-        studentId: '5',
-        tanggal: new Date(Date.now() - 345600000).toISOString(), // 4 days ago
-        materi: 'Biologi',
-        hadir: true,
-        catatan: 'Aktif bertanya'
-    }
-];
+let reports = JSON.parse(localStorage.getItem('reports')) || [];
 
 // Admin accounts (for completeness, though login is hardcoded)
 const admins = [
@@ -101,7 +29,11 @@ function generateId() {
 
 // Generate token
 function generateToken() {
-    return 'TOKEN' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    let token;
+    do {
+        token = Math.floor(1000 + Math.random() * 9000).toString(); // 1000-9999
+    } while (students.some(s => s.reportToken === token));
+    return token;
 }
 
 // API-like functions to replace fetch calls
