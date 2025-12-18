@@ -1,13 +1,6 @@
-# TODO: Add Filter and Search Features to admin.html
+# TODO: Add 'Aksi' Column with 'Kirim WA' Button to Token Table in admin.html
 
-- [ ] Add HTML elements above reports table: search input, class filter dropdown, reset button
-- [ ] Add HTML elements above tokens table: search input
-- [ ] Update CSS for new controls (search bar, filter dropdown, reset button)
-- [ ] Modify loadAllReports() to sort reports by date descending (latest first)
-- [ ] Modify loadAllReports() to filter by search (name or class) and class filter
-- [ ] Modify loadAllReports() to display status with colored text (green for Hadir, red for Alpha/Izin)
-- [ ] Modify loadTokenList() to filter by search (name or class)
-- [ ] Add event listeners for real-time search and filter inputs
-- [ ] Add event listener for reset button to clear all filters
-- [ ] Populate class filter dropdown with unique classes from students data
-- [ ] Test functionality: search, filter, sort, reset
+- [x] Add CSS class for WhatsApp button (.btn-wa with green background)
+- [x] Add 'Aksi' column header to the token table
+- [x] Add sendWA JavaScript function to generate WhatsApp link with message template
+- [x] Update loadTokenList function to include 'Kirim WA' button in each row

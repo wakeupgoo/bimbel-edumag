@@ -122,6 +122,22 @@
             margin-right: 5px;
         }
 
+        .btn-wa {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-wa:hover {
+            opacity: 0.9;
+        }
+
         .token-box {
             background: #eff6ff;
             border: 1px dashed #3b82f6;
@@ -336,6 +352,7 @@
                             <th>Nama Siswa</th>
                             <th>Kelas</th>
                             <th>Token</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="tokenList"></tbody>
@@ -538,7 +555,19 @@
             }
         });
 
-        // 9. Load Token List
+        // 9. Send WhatsApp Message
+        function sendWA(nama, token) {
+            const message = `Halo Ayah/Bunda ${nama}, berikut adalah link untuk memantau perkembangan belajar ananda di Edumag secara real-time:
+
+🔗 https://bimbeledumag.my.id/report.html 🔑 Kode Token: ${token}
+
+Terima kasih atas kepercayaan Ayah/Bunda.`;
+            const encodedMessage = encodeURIComponent(message);
+            const waUrl = `https://wa.me/?text=${encodedMessage}`;
+            window.open(waUrl, '_blank');
+        }
+
+        // 10. Load Token List
         function loadTokenList() {
             const result = getStudents();
             const tbody = document.getElementById('tokenList');
@@ -562,6 +591,7 @@
                         <td>${student.nama}</td>
                         <td>${student.kelas}</td>
                         <td><code>${student.reportToken}</code></td>
+                        <td><button onclick="sendWA('${student.nama}', '${student.reportToken}')" class="btn-wa btn-action">Kirim WA</button></td>
                     </tr>
                 `;
                 tbody.innerHTML += row;
