@@ -302,8 +302,8 @@
             reportsSection.style.display = 'none';
 
             // Find student by token
-            const students = getStudents().data;
-            const student = students.find(s => s.reportToken === token);
+            const students = JSON.parse(localStorage.getItem('students')) || [];
+            const student = students.find(s => s.reportToken.toString() === token.toString());
 
             if (!student) {
                 errorDiv.style.display = 'block';
