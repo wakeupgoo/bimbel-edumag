@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Sistem Raport Bimbel Edumag</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            color: #1e293b;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-action {
+            width: auto;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+
+        .token-box {
+            background: #eff6ff;
+            border: 1px dashed #3b82f6;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #475569;
+        }
+
+        .status-msg {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Management Siswa & Laporan</h1>
+            <p>Kelola data harian siswa Bimbel Edumag</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Tambah Siswa Baru</h2>
+                <form id="studentForm">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="namaSiswa" placeholder="Contoh: Ahmad Fauzi" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Kelas / Kelompok</label>
+                        <input type="text" id="kelasSiswa" placeholder="Contoh: 10-A" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Daftarkan Siswa</button>
+                </form>
+                <div id="tokenResult" class="token-box"></div>
+            </div>
+
+            <div class="card">
+                <h2 id="formTitle">Input Laporan Harian</h2>
+                <form id="reportForm">
+                    <div class="form-group">
+                        <label>Pilih Siswa</label>
+                        <select id="studentSelect" required>
+                            <option value="">-- Memuat Siswa... --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Materi / Pembahasan</label>
+                        <input type="text" id="materi" placeholder="Contoh: Matematika-Aljabar" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Status Kehadiran</label>
+                        <select id="hadir">
+                            <option value="true">Hadir</option>
+                            <option value="false">Alpha / Izin</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Catatan</label>
+                        <textarea id="catatan" rows="3" placeholder="Tambahkan catatan..."></textarea>
+                    </div>
+                    <button type="submit" id="submitReportBtn" class="btn-success">Simpan Laporan</button>
+                    <button type="button" id="cancelEditBtn" class="btn-secondary"
+                        style="display:none; margin-top:10px; background:#64748b">Batal Edit</button>
+                </form>
+                <p id="reportStatus" class="status-msg"></p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Daftar Laporan Terkini</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Nama Siswa</th>
+                            <th>Materi</th>
+                            <th>Status</th>
+                            <th>Catatan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        let isEditMode = false;
+        let currentEditId = null;
+
+        // 1. Ambil Siswa untuk Dropdown
+        function fetchStudents() {
+            const result = getStudents();
+            const select = document.getElementById('studentSelect');
+            select.innerHTML = '<option value="">-- Pilih Siswa --</option>';
+            result.data.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s._id;
+                opt.textContent = `${s.nama} (${s.kelas})`;
+                select.appendChild(opt);
+            });
+        }
+
+        // 2. Ambil Semua Laporan untuk Tabel
+        function loadAllReports() {
+            const result = getAllReports();
+            const tbody = document.getElementById('reportList');
+            tbody.innerHTML = '';
+
+            result.data.forEach(report => {
+                const date = new Date(report.tanggal).toLocaleDateString('id-ID');
+                const studentName = report.studentId ? report.studentId.nama : 'Siswa Dihapus';
+                const studentId = report.studentId ? report.studentId._id : '';
+
+                // Kita kirimkan data ke fungsi editReport dalam bentuk string aman
+                const row = `
+                    <tr>
+                        <td>${date}</td>
+                        <td>${studentName}</td>
+                        <td>${report.materi}</td>
+                        <td>${report.hadir ? '✅ Hadir' : '❌ Absen'}</td>
+                        <td>${report.catatan || '-'}</td>
+                        <td>
+                            <button onclick="setupEdit('${report._id}', '${studentId}', '${report.materi}', ${report.hadir}, '${report.catatan || ''}')" class="btn-warning btn-action">Edit</button>
+                            <button onclick="deleteReport('${report._id}')" class="btn-danger btn-action">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        // 3. Fungsi Menyiapkan Form untuk Edit
+        function setupEdit(id, studentId, materi, hadir, catatan) {
+            isEditMode = true;
+            currentEditId = id;
+
+            // Isi Form
+            document.getElementById('studentSelect').value = studentId;
+            document.getElementById('materi').value = materi;
+            document.getElementById('hadir').value = hadir.toString();
+            document.getElementById('catatan').value = catatan;
+
+            // UI Changes
+            document.getElementById('formTitle').innerText = "Edit Laporan";
+            document.getElementById('submitReportBtn').innerText = "Update Perubahan";
+            document.getElementById('submitReportBtn').className = "btn-warning";
+            document.getElementById('cancelEditBtn').style.display = "block";
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 4. Batalkan Edit
+        document.getElementById('cancelEditBtn').addEventListener('click', () => {
+            isEditMode = false;
+            currentEditId = null;
+            document.getElementById('reportForm').reset();
+            document.getElementById('formTitle').innerText = "Input Laporan Harian";
+            document.getElementById('submitReportBtn').innerText = "Simpan Laporan";
+            document.getElementById('submitReportBtn').className = "btn-success";
+            document.getElementById('cancelEditBtn').style.display = "none";
+        });
+
+        // 5. Submit Laporan (Simpan Baru ATAU Update)
+        document.getElementById('reportForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = {
+                studentId: document.getElementById('studentSelect').value,
+                materi: document.getElementById('materi').value,
+                hadir: document.getElementById('hadir').value === "true",
+                catatan: document.getElementById('catatan').value
+            };
+
+            let result;
+            if (isEditMode) {
+                result = updateReport(currentEditId, data);
+            } else {
+                result = addReport(data);
+            }
+
+            if (result.message === "success") {
+                document.getElementById('reportStatus').innerText = isEditMode ? "✅ Berhasil diupdate!" : "✅ Berhasil disimpan!";
+                document.getElementById('reportStatus').style.color = "green";
+                document.getElementById('cancelEditBtn').click(); // Reset ke mode normal
+                loadAllReports();
+            } else {
+                alert("Gagal memproses laporan");
+            }
+        });
+
+        // 6. Hapus Laporan
+        function deleteReport(id) {
+            if (confirm("Hapus laporan ini?")) {
+                const result = deleteReport(id);
+                if (result.message === "success") {
+                    loadAllReports();
+                }
+            }
+        }
+
+        // 7. Submit Form Siswa Baru
+        document.getElementById('studentForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = {
+                nama: document.getElementById('namaSiswa').value,
+                kelas: document.getElementById('kelasSiswa').value
+            };
+
+            const result = addStudent(data);
+
+            if (result.message === "success") {
+                // Tampilkan token
+                const tokenBox = document.getElementById('tokenResult');
+                tokenBox.innerHTML = `<strong>Token Siswa:</strong> ${result.data.reportToken}<br><small>Berikan token ini ke orang tua siswa untuk akses laporan.</small>`;
+                tokenBox.style.display = 'block';
+                document.getElementById('studentForm').reset();
+                fetchStudents(); // Refresh dropdown siswa
+            } else {
+                alert("Gagal daftarkan siswa: " + result.error);
+            }
+        });
+
+        // Inisialisasi
+        fetchStudents();
+        loadAllReports();
+    </script>
+</body>
+
+</html>
