@@ -300,6 +300,10 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Nilai (0-100)</label>
+                        <input type="number" id="nilai" min="0" max="100" placeholder="Contoh: 85" required>
+                    </div>
+                    <div class="form-group">
                         <label>Catatan</label>
                         <textarea id="catatan" rows="3" placeholder="Tambahkan catatan..."></textarea>
                     </div>
@@ -330,6 +334,7 @@
                             <th>Nama Siswa</th>
                             <th>Materi</th>
                             <th>Status</th>
+                            <th>Nilai</th>
                             <th>Catatan</th>
                             <th>Aksi</th>
                         </tr>
@@ -426,6 +431,13 @@
                 const statusColor = report.hadir ? 'var(--success)' : 'var(--danger)';
                 const statusHtml = `<span style="color: ${statusColor}; font-weight: bold;">${statusText}</span>`;
 
+                // Colored nilai based on score
+                let nilaiColor = 'var(--secondary)';
+                if (report.nilai >= 80) nilaiColor = 'var(--success)';
+                else if (report.nilai >= 60) nilaiColor = 'var(--warning)';
+                else if (report.nilai < 60) nilaiColor = 'var(--danger)';
+                const nilaiHtml = `<span style="color: ${nilaiColor}; font-weight: bold;">${report.nilai || '-'}</span>`;
+
                 // Kita kirimkan data ke fungsi editReport dalam bentuk string aman
                 const row = `
                     <tr>
@@ -433,9 +445,10 @@
                         <td>${studentName}</td>
                         <td>${report.materi}</td>
                         <td>${statusHtml}</td>
+                        <td>${nilaiHtml}</td>
                         <td>${report.catatan || '-'}</td>
                         <td>
-                            <button onclick="setupEdit('${report._id}', '${studentId}', '${report.materi}', ${report.hadir}, '${report.catatan || ''}')" class="btn-warning btn-action">Edit</button>
+                            <button onclick="setupEdit('${report._id}', '${studentId}', '${report.materi}', ${report.hadir}, '${report.catatan || ''}', ${report.nilai || 0})" class="btn-warning btn-action">Edit</button>
                             <button onclick="deleteReport('${report._id}')" class="btn-danger btn-action">Hapus</button>
                         </td>
                     </tr>
@@ -445,7 +458,7 @@
         }
 
         // 3. Fungsi Menyiapkan Form untuk Edit
-        function setupEdit(id, studentId, materi, hadir, catatan) {
+        function setupEdit(id, studentId, materi, hadir, catatan, nilai) {
             isEditMode = true;
             currentEditId = id;
 
@@ -453,6 +466,7 @@
             document.getElementById('studentSelect').value = studentId;
             document.getElementById('materi').value = materi;
             document.getElementById('hadir').value = hadir.toString();
+            document.getElementById('nilai').value = nilai;
             document.getElementById('catatan').value = catatan;
 
             // UI Changes
@@ -478,10 +492,16 @@
         // 5. Submit Laporan (Simpan Baru ATAU Update)
         document.getElementById('reportForm').addEventListener('submit', (e) => {
             e.preventDefault();
+            const nilaiValue = parseInt(document.getElementById('nilai').value);
+            if (nilaiValue < 0 || nilaiValue > 100) {
+                alert("Nilai harus antara 0-100");
+                return;
+            }
             const data = {
                 studentId: document.getElementById('studentSelect').value,
                 materi: document.getElementById('materi').value,
                 hadir: document.getElementById('hadir').value === "true",
+                nilai: nilaiValue,
                 catatan: document.getElementById('catatan').value
             };
 

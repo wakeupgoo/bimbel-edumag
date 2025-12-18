@@ -317,6 +317,12 @@
                     const attendanceClass = report.hadir ? 'present' : 'absent';
                     const attendanceText = report.hadir ? '✅ Hadir' : '❌ Tidak Hadir';
 
+                    // Color coding for nilai
+                    let nilaiColor = '#374151'; // default
+                    if (report.nilai >= 80) nilaiColor = '#22c55e'; // green
+                    else if (report.nilai >= 60) nilaiColor = '#f59e0b'; // yellow
+                    else if (report.nilai < 60) nilaiColor = '#ef4444'; // red
+
                     return `
                         <div class="report-item">
                             <div class="report-date">${date}</div>
@@ -328,6 +334,10 @@
                                 <div class="detail-item">
                                     <div class="detail-label">Status Kehadiran</div>
                                     <div class="detail-value attendance ${attendanceClass}">${attendanceText}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Nilai</div>
+                                    <div class="detail-value" style="color: ${nilaiColor}; font-weight: bold;">${report.nilai || '-'}</div>
                                 </div>
                             </div>
                             ${report.catatan ? `

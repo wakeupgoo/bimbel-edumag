@@ -1,6 +1,7 @@
-# TODO: Add 'Aksi' Column with 'Kirim WA' Button to Token Table in admin.html
+# TODO: Implement "Nilai Harian" Feature
 
-- [x] Add CSS class for WhatsApp button (.btn-wa with green background)
-- [x] Add 'Aksi' column header to the token table
-- [x] Add sendWA JavaScript function to generate WhatsApp link with message template
-- [x] Update loadTokenList function to include 'Kirim WA' button in each row
+## Tasks
+- [ ] Update data.js: Add 'nilai' property to report objects and update addReport/updateReport functions
+- [ ] Update admin.html: Add 'Nilai' input field (0-100) with validation, add 'Nilai' column in table with color indicators, ensure mobile friendly
+- [ ] Update report.html: Add attractive grade display (badge/progress circle), add "Rata-rata Nilai Minggu Ini" with circular progress bar, add confetti effect for score 100
+- [ ] Test the implementation: Add reports with grades and verify display in admin and report views
