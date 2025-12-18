@@ -202,6 +202,39 @@
             font-family: monospace;
             font-size: 0.9rem;
         }
+
+        /* Filter controls styles */
+        .filter-controls {
+            margin-bottom: 15px;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-select {
+            min-width: 120px;
+        }
+
+        @media (max-width: 768px) {
+            .filter-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-input,
+            .filter-select {
+                min-width: auto;
+            }
+        }
     </style>
 </head>
 
@@ -264,6 +297,15 @@
 
         <div class="card">
             <h2>Daftar Laporan Terkini</h2>
+            <div class="filter-controls">
+                <div class="filter-row">
+                    <input type="text" id="reportSearch" placeholder="Cari nama siswa atau kelas..." class="search-input">
+                    <select id="classFilter" class="filter-select">
+                        <option value="">Semua Kelas</option>
+                    </select>
+                    <button id="resetFilters" class="btn-secondary" style="width: auto; margin-left: 10px;">Reset Filter</button>
+                </div>
+            </div>
             <div class="table-container">
                 <table>
                     <thead>
@@ -284,6 +326,9 @@
 
         <div class="card">
             <h2>Daftar Token Siswa</h2>
+            <div class="filter-controls">
+                <input type="text" id="tokenSearch" placeholder="Cari nama siswa atau kelas..." class="search-input">
+            </div>
             <div class="table-container">
                 <table>
                     <thead>
@@ -333,10 +378,36 @@
             const tbody = document.getElementById('reportList');
             tbody.innerHTML = '';
 
-            result.data.forEach(report => {
+            // Get filter values
+            const searchTerm = document.getElementById('reportSearch').value.toLowerCase();
+            const selectedClass = document.getElementById('classFilter').value;
+
+            // Sort by date descending (latest first)
+            let filteredReports = result.data.sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+
+            // Apply filters
+            filteredReports = filteredReports.filter(report => {
+                const studentName = report.studentId ? report.studentId.nama : '';
+                const studentClass = report.studentId ? report.studentId.kelas : '';
+
+                const matchesSearch = !searchTerm ||
+                    studentName.toLowerCase().includes(searchTerm) ||
+                    studentClass.toLowerCase().includes(searchTerm);
+
+                const matchesClass = !selectedClass || studentClass === selectedClass;
+
+                return matchesSearch && matchesClass;
+            });
+
+            filteredReports.forEach(report => {
                 const date = new Date(report.tanggal).toLocaleDateString('id-ID');
                 const studentName = report.studentId ? report.studentId.nama : 'Siswa Dihapus';
                 const studentId = report.studentId ? report.studentId._id : '';
+
+                // Colored status
+                const statusText = report.hadir ? 'Hadir' : 'Absen';
+                const statusColor = report.hadir ? 'var(--success)' : 'var(--danger)';
+                const statusHtml = `<span style="color: ${statusColor}; font-weight: bold;">${statusText}</span>`;
 
                 // Kita kirimkan data ke fungsi editReport dalam bentuk string aman
                 const row = `
@@ -344,7 +415,7 @@
                         <td>${date}</td>
                         <td>${studentName}</td>
                         <td>${report.materi}</td>
-                        <td>${report.hadir ? '✅ Hadir' : '❌ Absen'}</td>
+                        <td>${statusHtml}</td>
                         <td>${report.catatan || '-'}</td>
                         <td>
                             <button onclick="setupEdit('${report._id}', '${studentId}', '${report.materi}', ${report.hadir}, '${report.catatan || ''}')" class="btn-warning btn-action">Edit</button>
@@ -472,7 +543,20 @@
             const result = getStudents();
             const tbody = document.getElementById('tokenList');
             tbody.innerHTML = '';
-            result.data.forEach(student => {
+
+            // Get search term
+            const searchTerm = document.getElementById('tokenSearch').value.toLowerCase();
+
+            // Filter students
+            const filteredStudents = result.data.filter(student => {
+                const studentName = student.nama.toLowerCase();
+                const studentClass = student.kelas.toLowerCase();
+                return !searchTerm ||
+                    studentName.includes(searchTerm) ||
+                    studentClass.includes(searchTerm);
+            });
+
+            filteredStudents.forEach(student => {
                 const row = `
                     <tr>
                         <td>${student.nama}</td>
@@ -484,8 +568,43 @@
             });
         }
 
+        // 10. Populate Class Filter Dropdown
+        function populateClassFilter() {
+            const result = getStudents();
+            const classFilter = document.getElementById('classFilter');
+            const classes = new Set();
+
+            result.data.forEach(student => {
+                classes.add(student.kelas);
+            });
+
+            // Clear existing options except "Semua Kelas"
+            classFilter.innerHTML = '<option value="">Semua Kelas</option>';
+
+            // Add class options
+            Array.from(classes).sort().forEach(className => {
+                const option = document.createElement('option');
+                option.value = className;
+                option.textContent = className;
+                classFilter.appendChild(option);
+            });
+        }
+
+        // 11. Event Listeners for Real-time Filtering
+        document.getElementById('reportSearch').addEventListener('input', loadAllReports);
+        document.getElementById('classFilter').addEventListener('change', loadAllReports);
+        document.getElementById('tokenSearch').addEventListener('input', loadTokenList);
+
+        // 12. Reset Filters
+        document.getElementById('resetFilters').addEventListener('click', () => {
+            document.getElementById('reportSearch').value = '';
+            document.getElementById('classFilter').value = '';
+            loadAllReports();
+        });
+
         // Inisialisasi
         fetchStudents();
+        populateClassFilter();
         loadAllReports();
         loadTokenList();
     </script>
