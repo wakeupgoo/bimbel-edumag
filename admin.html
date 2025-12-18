@@ -281,6 +281,22 @@
             </div>
             <button type="button" id="exportBtn" class="btn-primary" style="margin-top: 20px; width: auto;">Salin Data JSON</button>
         </div>
+
+        <div class="card">
+            <h2>Daftar Token Siswa</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama Siswa</th>
+                            <th>Kelas</th>
+                            <th>Token</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tokenList"></tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <!-- Modal for JSON Export -->
@@ -425,6 +441,7 @@
                 tokenBox.style.display = 'block';
                 document.getElementById('studentForm').reset();
                 fetchStudents(); // Refresh dropdown siswa
+                loadTokenList(); // Refresh token list
             } else {
                 alert("Gagal daftarkan siswa: " + result.error);
             }
@@ -450,9 +467,27 @@
             }
         });
 
+        // 9. Load Token List
+        function loadTokenList() {
+            const result = getStudents();
+            const tbody = document.getElementById('tokenList');
+            tbody.innerHTML = '';
+            result.data.forEach(student => {
+                const row = `
+                    <tr>
+                        <td>${student.nama}</td>
+                        <td>${student.kelas}</td>
+                        <td><code>${student.reportToken}</code></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
         // Inisialisasi
         fetchStudents();
         loadAllReports();
+        loadTokenList();
     </script>
 </body>
 
