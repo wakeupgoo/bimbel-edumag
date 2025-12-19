@@ -5,9 +5,10 @@ async function cariNilai() {
     const btn = document.getElementById('searchBtn');
     const loader = document.getElementById('loader');
     const resultArea = document.getElementById('resultArea');
-    const tableBody = document.getElementById('historyTableBody');
+    const progressCardsContainer = document.getElementById('progressCards');
     const displayNama = document.getElementById('displayNamaSiswa');
 
+    // Apps Script membandingkan string secara kaku, kita ambil value asli
     const token = tokenInput.value.trim();
 
     if (!token) {
@@ -15,35 +16,50 @@ async function cariNilai() {
         return;
     }
 
+    // UI Feedback
     btn.disabled = true;
     if (loader) loader.style.display = 'block';
     resultArea.style.display = 'none';
-    tableBody.innerHTML = '';
+    progressCardsContainer.innerHTML = '';
 
     try {
-        const response = await fetch(`${SCRIPT_URL}?action=getHistory&token_siswa=${encodeURIComponent(token)}`);
+        // Menggunakan parameter 'token_siswa' sesuai dengan doGet di Apps Script
+        const response = await fetch(`${SCRIPT_URL}?action=getHistory&token_siswa=${encodeURIComponent(token)}`, {
+            method: "GET",
+            mode: "cors"
+        });
+
         const data = await response.json();
 
         if (data.status === "success" && data.history && data.history.length > 0) {
-            if (displayNama) displayNama.textContent = data.history[0].siswa || "Siswa";
 
-            // Calculate summary data
+            // --- PEMETAAN DATA (PENTING: Gunakan Huruf Kecil sesuai formatToJSON) ---
+            // Data diambil dari Apps Script yang sudah diproses formatToJSON
+            const firstRecord = data.history[0];
+
+            // Ambil nama (Coba nama_siswa dulu, jika gagal coba nama)
+            if (displayNama) displayNama.textContent = firstRecord.nama_siswa || firstRecord.siswa || "Siswa";
+
+            // Kalkulasi Summary
             const totalSessions = data.history.length;
             const averageScore = data.history.reduce((sum, row) => sum + (parseFloat(row.nilai) || 0), 0) / totalSessions;
-            const latestMaterial = data.history.sort((a, b) => new Date(b.timestamp || b.tanggal) - new Date(a.timestamp || a.tanggal))[0]?.materi || "-";
 
-            // Update summary cards
-            document.getElementById('averageScore').textContent = averageScore.toFixed(1);
-            document.getElementById('totalSessions').textContent = totalSessions;
-            document.getElementById('latestMaterial').textContent = latestMaterial;
+            // Ambil materi terakhir
+            const latestMaterial = firstRecord.materi || "-";
 
-            // Generate progress cards
-            const progressCardsContainer = document.getElementById('progressCards');
-            progressCardsContainer.innerHTML = '';
+            // Update Summary Cards di UI
+            if (document.getElementById('averageScore')) document.getElementById('averageScore').textContent = averageScore.toFixed(1);
+            if (document.getElementById('totalSessions')) document.getElementById('totalSessions').textContent = totalSessions;
+            if (document.getElementById('latestMaterial')) document.getElementById('latestMaterial').textContent = latestMaterial;
 
+            // Generate Progress Cards
             data.history.forEach(row => {
-                const waktu = row.timestamp || row.tanggal || "-";
+                // Apps Script: Tanggal otomatis jadi format dd/MM/yyyy di formatToJSON
+                const waktu = row.tanggal || row.timestamp || "-";
                 const score = parseFloat(row.nilai) || 0;
+                const materi = row.materi || "-";
+                const catatan = row.catatan || "-";
+
                 let badgeColor = 'red';
                 if (score > 80) badgeColor = 'green';
                 else if (score >= 70) badgeColor = 'yellow';
@@ -54,12 +70,12 @@ async function cariNilai() {
                     <div class="card-header">
                         <div class="score-badge ${badgeColor}">${score}</div>
                         <div class="card-main-info">
-                            <h4>${row.materi || '-'}</h4>
+                            <h4>${materi}</h4>
                             <p>${waktu}</p>
                         </div>
                     </div>
                     <div class="card-notes">
-                        <p>${row.catatan || '-'}</p>
+                        <p>${catatan}</p>
                     </div>
                 `;
                 progressCardsContainer.appendChild(card);
@@ -67,11 +83,13 @@ async function cariNilai() {
 
             resultArea.style.display = 'block';
             resultArea.scrollIntoView({ behavior: 'smooth' });
+
         } else {
-            alert("Data tidak ditemukan. Pastikan Token benar.");
+            alert("Data tidak ditemukan. Pastikan Token benar dan sudah ada riwayat belajar.");
         }
     } catch (err) {
-        alert("Terjadi gangguan koneksi ke server.");
+        console.error("Error Detail:", err);
+        alert("Terjadi gangguan koneksi ke server. Pastikan Anda sudah mempublikasikan Apps Script sebagai 'Anyone'.");
     } finally {
         btn.disabled = false;
         if (loader) loader.style.display = 'none';
