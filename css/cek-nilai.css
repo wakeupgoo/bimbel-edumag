@@ -1,0 +1,300 @@
+/* cek-nilai.css - Styles for Cek Nilai Page */
+/* Based on index.html and style.css */
+/* Colors: Yellow (#FFD700), Dark Blue (#1e40af) */
+/* Fonts: Poppins, Oswald */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Oswald:wght@700&display=swap');
+
+:root {
+    --primary-yellow: #FFD700;
+    --primary-blue: #1e40af;
+    --bg-light: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-dark: #111827;
+    --text-light: #666666;
+    --border-color: #ddd;
+    --success-color: #4CAF50;
+    --error-color: #ef4444;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --radius-default: 8px;
+    --transition-speed: 0.3s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.dashboard-wrapper {
+    max-width: 800px;
+    margin: 120px auto 40px; /* Adjusted for fixed navbar */
+    padding: 20px;
+}
+
+.dashboard-wrapper {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.card-admin {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius-default);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Search Section - Modern Form */
+.search-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.search-section h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    color: var(--primary-blue);
+    margin-bottom: var(--spacing-md);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.search-section p {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: var(--spacing-lg);
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#studentToken {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-default);
+    font-size: 1rem;
+    transition: border-color var(--transition-speed);
+}
+
+#studentToken:focus {
+    outline: none;
+    border-color: var(--primary-yellow);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.btn-save {
+    background: var(--primary-yellow);
+    color: var(--text-dark);
+    border: 2px solid var(--primary-yellow);
+    padding: 12px 20px;
+    border-radius: var(--radius-default);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.btn-save:hover {
+    background: var(--text-dark);
+    color: var(--primary-yellow);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+/* Student Info Card */
+.result-card {
+    display: none;
+    margin-top: 20px;
+    border-top: 3px solid var(--success-color);
+    border-radius: var(--radius-default);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.student-info {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: var(--radius-default);
+}
+
+#displayNamaSiswa {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    color: var(--primary-blue);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+#displayKelas {
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+/* Responsive Table */
+.table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+.history-table th,
+.history-table td {
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px;
+    text-align: left;
+}
+
+.history-table th {
+    background-color: var(--bg-light);
+    font-weight: 600;
+    color: var(--primary-blue);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+.history-table tbody tr:hover {
+    background-color: rgba(255, 215, 0, 0.05);
+}
+
+.score-badge {
+    background: var(--success-color);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    display: inline-block;
+}
+
+/* Loading Spinner */
+#loader {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: var(--primary-blue);
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(30, 64, 175, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-blue);
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error Message */
+#errorMsg {
+    display: none;
+    text-align: center;
+    color: var(--error-color);
+    margin-top: 20px;
+    font-weight: 600;
+    background: rgba(239, 68, 68, 0.1);
+    padding: 10px;
+    border-radius: var(--radius-default);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* Back Link */
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-link a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color var(--transition-speed);
+}
+
+.back-link a:hover {
+    color: var(--primary-blue);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-wrapper {
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    .card-admin {
+        padding: 20px;
+    }
+
+    .search-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    #studentToken {
+        width: 100%;
+    }
+
+    .btn-save {
+        width: 100%;
+    }
+
+    .history-table th,
+    .history-table td {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+
+    .history-table th:nth-child(5),
+    .history-table td:nth-child(5) {
+        display: none; /* Hide notes on mobile for better fit */
+    }
+}
+
+@media (max-width: 480px) {
+    .search-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .history-table th,
+    .history-table td {
+        padding: 6px;
+        font-size: 0.75rem;
+    }
+}

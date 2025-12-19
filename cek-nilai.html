@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Raport - Edumag</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cek-nilai.css">
+</head>
+
+<body>
+    <a href="#" class="floating-cta" data-js-hook="whatsapp-cta-float" target="_blank" aria-label="WhatsApp Konsultasi">
+        <button class="btn btn-primary">
+            <i class="fa-brands fa-whatsapp"></i> <span>Konsultasi Cepat</span>
+        </button>
+    </a>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo logo-split">
+                <img src="./assets/images/logo-new.png" alt="Bimbel Edumag Logo" class="logo-image">
+                <div class="logo-text">
+                    <span class="tulisan-edumag">Bimbel</span>
+                    <span class="tulisan-edumag">Edumag</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#masterkey">MasterKey</a>
+                <a href="#visi-misi">Visi & Misi</a>
+                <a href="#program">Program</a>
+                <a href="#keunggulan">Keunggulan</a>
+                <a href="#testimoni">Testimoni</a>
+                <a href="cek-nilai.html"><i class="fa-solid fa-clipboard-check"></i> Cek Raport</a>
+                <a href="blog.html">Blog</a>
+                <a href="#faq">FAQ</a>
+                <a href="#" class="btn btn-primary" data-js-hook="whatsapp-cta" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Hubungi Kami
+                </a>
+            </nav>
+            <button class="hamburger" aria-label="Toggle navigation menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#masterkey">MasterKey</a>
+            <a href="#visi-misi">Visi & Misi</a>
+            <a href="#program">Program</a>
+            <a href="#keunggulan">Keunggulan</a>
+            <a href="#testimoni">Testimoni</a>
+            <a href="cek-nilai.html"><i class="fa-solid fa-clipboard-check"></i> Cek Raport</a>
+            <a href="blog.html">Blog</a>
+            <a href="#faq">FAQ</a>
+            <a href="#" class="btn btn-primary" data-js-hook="whatsapp-cta" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> Hubungi Kami
+            </a>
+        </nav>
+    </div>
+
+<body>
+    <div class="dashboard-wrapper">
+        <div class="card-admin">
+            <div class="search-section">
+                <h2>Lihat Progres Belajar Siswa</h2>
+                <p>Masukkan Token Siswa untuk melihat riwayat nilai dan evaluasi.</p>
+                <div class="search-form">
+                    <input type="text" id="studentToken" placeholder="Contoh: SIS-001">
+                    <button type="button" onclick="cariNilai()" id="searchBtn" class="btn-save">Cari Data</button>
+                </div>
+            </div>
+
+            <div id="resultArea" class="result-card">
+                <div id="studentInfo" class="student-info">
+                    <h3 id="displayNamaSiswa">Nama Siswa</h3>
+                    <p id="displayKelas">Kelas</p>
+
+                    <div class="table-container">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Materi</th>
+                                    <th>Tutor</th>
+                                    <th>Skor</th>
+                                    <th>Catatan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loader">
+                <span class="spinner"></span>
+                Sedang mencari data...
+            </div>
+            <div id="errorMsg">Token tidak ditemukan!</div>
+        </div>
+
+        <div class="back-link">
+            <a href="index.html">&larr; Kembali ke Dashboard</a>
+        </div>
+    </div>
+
+    <script src="js/cek-nilai.js"></script>
+</body>
+
+</html>

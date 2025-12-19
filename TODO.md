@@ -1,7 +1,20 @@
-# TODO: Implement "Nilai Harian" Feature
+# TODO List for Integrating cek-nilai.html with Main Website
 
-## Tasks
-- [ ] Update data.js: Add 'nilai' property to report objects and update addReport/updateReport functions
-- [ ] Update admin.html: Add 'Nilai' input field (0-100) with validation, add 'Nilai' column in table with color indicators, ensure mobile friendly
-- [ ] Update report.html: Add attractive grade display (badge/progress circle), add "Rata-rata Nilai Minggu Ini" with circular progress bar, add confetti effect for score 100
-- [ ] Test the implementation: Add reports with grades and verify display in admin and report views
+## Completed Tasks
+- [x] Copy navbar structure from index.html to cek-nilai.html
+- [x] Add Font Awesome link to cek-nilai.html
+- [x] Include style.css in cek-nilai.html
+- [x] Add popup overlay from index.html
+- [x] Add floating CTA from index.html
+- [x] Adjust dashboard-wrapper margin for fixed navbar
+- [x] Add sticky navbar functionality to js/cek-nilai.js
+- [x] Add hamburger menu functionality to js/cek-nilai.js
+- [x] Add popup initialization to js/cek-nilai.js
+- [x] Copy footer from index.html to cek-nilai.html
+- [x] Integrate WhatsApp links with data from data/index.json (similar to main.js)
+
+## Remaining Tasks
+- [ ] Test the integrated page for functionality
+- [ ] Ensure responsive design works on mobile
+- [ ] Verify WhatsApp links are populated correctly
+- [ ] Check for any console errors
