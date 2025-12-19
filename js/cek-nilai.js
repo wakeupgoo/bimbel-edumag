@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwWs7eqr_hGSTTCwmssnMgHf3GHKpTqoxszyclnRveKLwEmi5xxNL8pxUBouBdzYde4Cg/exec";
 
 async function cariNilai() {
     const tokenInput = document.getElementById('studentToken');
@@ -27,18 +27,42 @@ async function cariNilai() {
         if (data.status === "success" && data.history && data.history.length > 0) {
             if (displayNama) displayNama.textContent = data.history[0].siswa || "Siswa";
 
-            data.history.forEach(row => {
-                const tr = document.createElement('tr');
-                const waktu = row.timestamp || row.tanggal || "-";
+            // Calculate summary data
+            const totalSessions = data.history.length;
+            const averageScore = data.history.reduce((sum, row) => sum + (parseFloat(row.nilai) || 0), 0) / totalSessions;
+            const latestMaterial = data.history.sort((a, b) => new Date(b.timestamp || b.tanggal) - new Date(a.timestamp || a.tanggal))[0]?.materi || "-";
 
-                tr.innerHTML = `
-                    <td style="white-space: nowrap;">${waktu}</td>
-                    <td><b>${row.materi || '-'}</b></td>
-                    <td>${row.tutor || '-'}</td>
-                    <td><span class="score-badge">${row.nilai || '0'}</span></td>
-                    <td style="font-size: 0.85em; font-style: italic; color: #666;">${row.catatan || '-'}</td>
+            // Update summary cards
+            document.getElementById('averageScore').textContent = averageScore.toFixed(1);
+            document.getElementById('totalSessions').textContent = totalSessions;
+            document.getElementById('latestMaterial').textContent = latestMaterial;
+
+            // Generate progress cards
+            const progressCardsContainer = document.getElementById('progressCards');
+            progressCardsContainer.innerHTML = '';
+
+            data.history.forEach(row => {
+                const waktu = row.timestamp || row.tanggal || "-";
+                const score = parseFloat(row.nilai) || 0;
+                let badgeColor = 'red';
+                if (score > 80) badgeColor = 'green';
+                else if (score >= 70) badgeColor = 'yellow';
+
+                const card = document.createElement('div');
+                card.className = 'progress-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="score-badge ${badgeColor}">${score}</div>
+                        <div class="card-main-info">
+                            <h4>${row.materi || '-'}</h4>
+                            <p>${waktu}</p>
+                        </div>
+                    </div>
+                    <div class="card-notes">
+                        <p>${row.catatan || '-'}</p>
+                    </div>
                 `;
-                tableBody.appendChild(tr);
+                progressCardsContainer.appendChild(card);
             });
 
             resultArea.style.display = 'block';

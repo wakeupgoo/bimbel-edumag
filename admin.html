@@ -8,7 +8,7 @@
 
     <script>
         if (localStorage.getItem('isLoggedIn') !== 'true') {
-            window.location.replace('login.html');
+            window.location.replace('bimbeledumagmasterkey2023.html');
         }
     </script>
 
@@ -101,6 +101,13 @@
                         </div>
                     </div>
 
+                    <div class="field-row">
+                        <div class="field-box">
+                            <label>WhatsApp Siswa</label>
+                            <input type="text" id="mWhatsApp" placeholder="Contoh: 6281234567890" required>
+                        </div>
+                    </div>
+
                     <div style="display:flex; gap:10px;">
                         <button type="submit" id="btnSubmitManage" class="btn-primary">Tambah
                             Siswa Baru</button>
@@ -116,6 +123,7 @@
                                 <th>Nama</th>
                                 <th>Kelas</th>
                                 <th>Token</th>
+                                <th>WhatsApp</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

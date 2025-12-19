@@ -26,7 +26,9 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
                 localStorage.setItem('namaTutor', data.nama);
                 window.location.href = 'admin.html';
             } else {
-                alert("Gagal: " + data.message);
+                const errorDiv = document.getElementById('errorMessage');
+                errorDiv.textContent = "Gagal: " + data.message;
+                errorDiv.style.display = 'block';
                 btn.disabled = false;
                 btn.textContent = "Masuk";
             }

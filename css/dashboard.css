@@ -335,6 +335,21 @@ table th {
     background-color: #757575;
 }
 
+.btn-wa {
+    background-color: #25d366;
+    color: var(--color-white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-default);
+    cursor: pointer;
+    margin-right: 0.5rem;
+    transition: background-color var(--transition-speed);
+}
+
+.btn-wa:hover {
+    background-color: #128c7e;
+}
+
 /* Footer Info */
 .footer-info {
     margin-top: var(--spacing-lg);
@@ -343,22 +358,42 @@ table th {
 }
 
 /* --- Login Page --- */
+body {
+    background: radial-gradient(circle, var(--color-secondary) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-color: var(--color-light);
+}
+
 .login-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, var(--color-light) 0%, var(--color-white) 100%);
     padding: var(--spacing-md);
 }
 
 #loginForm {
-    background-color: var(--color-white);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: var(--spacing-lg);
     border-radius: var(--radius-default);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
+    color: var(--color-dark);
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.logo {
+    max-width: 150px;
+    height: auto;
 }
 
 #loginForm h2 {

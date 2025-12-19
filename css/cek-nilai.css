@@ -150,6 +150,126 @@ body {
     font-size: 0.9rem;
 }
 
+/* Summary Cards */
+.summary-cards {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.summary-card {
+    flex: 1;
+    min-width: 150px;
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.summary-card h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.summary-card p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+/* Progress Cards */
+.progress-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.progress-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    border: 1px solid var(--border-color);
+}
+
+.progress-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.score-badge {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.score-badge.green {
+    background-color: #4CAF50;
+}
+
+.score-badge.yellow {
+    background-color: #FFD700;
+    color: var(--text-dark);
+}
+
+.score-badge.red {
+    background-color: #ef4444;
+}
+
+.card-main-info h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    color: var(--primary-blue);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.card-main-info p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.card-notes {
+    background: var(--bg-light);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-yellow);
+}
+
+.card-notes p {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin: 0;
+    font-style: italic;
+}
+
 /* Responsive Table */
 .table-container {
     overflow-x: auto;
