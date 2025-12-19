@@ -88,20 +88,25 @@
                     <h3 id="displayNamaSiswa">Nama Siswa</h3>
                     <p id="displayKelas">Kelas</p>
 
-                    <div class="table-container">
-                        <table class="history-table">
-                            <thead>
-                                <tr>
-                                    <th>Tanggal</th>
-                                    <th>Materi</th>
-                                    <th>Tutor</th>
-                                    <th>Skor</th>
-                                    <th>Catatan</th>
-                                </tr>
-                            </thead>
-                            <tbody id="historyTableBody">
-                            </tbody>
-                        </table>
+                    <!-- Summary Cards -->
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <h4>Rata-rata Nilai</h4>
+                            <p id="averageScore">-</p>
+                        </div>
+                        <div class="summary-card">
+                            <h4>Total Sesi</h4>
+                            <p id="totalSessions">-</p>
+                        </div>
+                        <div class="summary-card">
+                            <h4>Materi Terbaru</h4>
+                            <p id="latestMaterial">-</p>
+                        </div>
+                    </div>
+
+                    <!-- Progress Cards Container -->
+                    <div id="progressCards" class="progress-cards-container">
+                        <!-- Progress cards will be dynamically added here -->
                     </div>
                 </div>
             </div>

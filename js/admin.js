@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwWs7eqr_hGSTTCwmssnMgHf3GHKpTqoxszyclnRveKLwEmi5xxNL8pxUBouBdzYde4Cg/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIgfVuymOcml_VOeNszCNKr1hPC53MJujji_IOJ7RIItQHogXqyYSz7pvKCUFmMcEJWw/exec";
 const SECRET_TOKEN = "TOKEN_RAHASIA_KITA";
 
 document.addEventListener('DOMContentLoaded', () => {
