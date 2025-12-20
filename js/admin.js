@@ -53,14 +53,14 @@ async function loadStudentsFromSheets() {
             return;
         }
 
-        // Check if students is an array
-        if (!Array.isArray(data)) {
-            console.error("Data is not an array:", data);
+        // Check for success status and valid data array
+        if (data.status !== 'success' || !Array.isArray(data.data)) {
+            console.error("Invalid response format:", data);
             tableBody.innerHTML = '<tr><td colspan="5">❌ Error: Invalid data format from server</td></tr>';
             return;
         }
 
-        const students = data;
+        const students = data.data;
 
         // Kosongkan dulu
         select.innerHTML = '<option value="">-- Pilih Siswa --</option>';
@@ -159,6 +159,7 @@ document.getElementById('formManageSiswa').addEventListener('submit', async func
 
     const payload = {
         action: isEdit ? "editStudent" : "addStudent",
+        token: sessionStorage.getItem('authToken'),
         old_token: document.getElementById('oldToken').value,
         id_siswa: document.getElementById('mID').value,
         nama_siswa: document.getElementById('mNama').value,

@@ -49,14 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await response.json();
 
-                if (data.token) {
+                if (data.status === 'success') {
                     // Simpan data sesi di browser
                     sessionStorage.setItem('authToken', data.token);
                     sessionStorage.setItem('namaTutor', data.nama);
 
                     // Pengalihan ke halaman admin
                     // (Sesuai instruksi Anda tentang masterkey jika diperlukan)
-                    window.location.href = 'admin.html';
+                    window.location.replace('admin.html');
                 } else {
                     // Jika status error dari Apps Script (Username/Password salah)
                     showError(data.error || "Username atau Password salah!");
