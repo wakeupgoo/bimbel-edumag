@@ -42,12 +42,6 @@ body {
     padding: 20px;
 }
 
-.dashboard-wrapper {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-}
-
 .card-admin {
     background: var(--card-bg);
     padding: 30px;
@@ -371,7 +365,7 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .dashboard-wrapper {
-        margin: 20px auto;
+        margin: 100px auto 20px; /* Adjusted for fixed navbar on mobile */
         padding: 10px;
     }
 
