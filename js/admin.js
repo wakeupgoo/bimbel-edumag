@@ -1,15 +1,14 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIgfVuymOcml_VOeNszCNKr1hPC53MJujji_IOJ7RIItQHogXqyYSz7pvKCUFmMcEJWw/exec";
-const SECRET_TOKEN = "TOKEN_RAHASIA_KITA";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsheqbKDYDDHVP_cg__P1QmqsPyHSWquklMCBUoYbeDionsjgynmFlxoaO3dItzjQRwg/exec";
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Proteksi Halaman
-    if (localStorage.getItem('isLoggedIn') !== 'true') {
+    if (!sessionStorage.getItem('authToken')) {
         window.location.replace('login.html');
         return;
     }
 
     // 2. Set Tampilan Nama Tutor
-    const nama = localStorage.getItem('namaTutor');
+    const nama = sessionStorage.getItem('namaTutor');
     if (document.getElementById('tutor')) document.getElementById('tutor').value = nama || "Tutor";
     if (document.getElementById('namaTutorDisplay')) {
         document.getElementById('namaTutorDisplay').textContent = "Halo, " + (nama || "Admin");
@@ -22,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- FUNGSI LOGOUT ---
 function logout() {
     if (confirm("Apakah Anda yakin ingin keluar dari aplikasi?")) {
-        localStorage.clear();
+        sessionStorage.clear();
         window.location.replace('login.html');
     }
 }
@@ -37,8 +36,31 @@ async function loadStudentsFromSheets() {
     tableBody.innerHTML = '<tr><td colspan="5">⏳ Memuat data siswa...</td></tr>';
 
     try {
-        const response = await fetch(`${SCRIPT_URL}?action=getStudents`);
-        const students = await response.json();
+        const token = sessionStorage.getItem('authToken');
+        const response = await fetch(`${SCRIPT_URL}?action=getStudents&token=${encodeURIComponent(token)}`);
+        const data = await response.json();
+
+        // Check for backend error response
+        if (data.status === 'error') {
+            console.error("Backend error:", data.message);
+            if (data.message.includes('Token tidak valid')) {
+                alert("Sesi login telah berakhir. Silakan login kembali.");
+                sessionStorage.clear();
+                window.location.replace('login.html');
+                return;
+            }
+            tableBody.innerHTML = `<tr><td colspan="5">❌ Error: ${data.message}</td></tr>`;
+            return;
+        }
+
+        // Check if students is an array
+        if (!Array.isArray(data)) {
+            console.error("Data is not an array:", data);
+            tableBody.innerHTML = '<tr><td colspan="5">❌ Error: Invalid data format from server</td></tr>';
+            return;
+        }
+
+        const students = data;
 
         // Kosongkan dulu
         select.innerHTML = '<option value="">-- Pilih Siswa --</option>';
@@ -91,9 +113,10 @@ document.getElementById('formSiswa').addEventListener('submit', function (e) {
     btn.disabled = true;
     btn.textContent = "Menyimpan...";
 
+    const token = sessionStorage.getItem('authToken');
     const payload = {
         action: "inputProgress",
-        token: SECRET_TOKEN,
+        token: token,
         tutor: document.getElementById('tutor').value,
         siswa: selectSiswa.options[selectSiswa.selectedIndex].dataset.nama,
         token_siswa: selectSiswa.value,
@@ -113,7 +136,7 @@ document.getElementById('formSiswa').addEventListener('submit', function (e) {
             if (data.status === "success") {
                 alert("✅ Progres berhasil disimpan!");
                 this.reset();
-                document.getElementById('tutor').value = localStorage.getItem('namaTutor');
+                document.getElementById('tutor').value = sessionStorage.getItem('namaTutor');
             } else {
                 alert("❌ Gagal: " + data.message);
             }
@@ -199,10 +222,11 @@ async function hapusSiswa(token) {
     if (!confirm(`Hapus siswa dengan token ${token}? Data nilai tidak akan hilang tapi siswa tidak muncul lagi.`)) return;
 
     try {
+        const authToken = sessionStorage.getItem('authToken');
         const res = await fetch(SCRIPT_URL, {
             method: "POST",
             mode: "cors",
-            body: JSON.stringify({ action: "deleteStudent", token_siswa: token })
+            body: JSON.stringify({ action: "deleteStudent", token: authToken, token_siswa: token })
         });
         const data = await res.json();
         alert(data.message);

@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIgfVuymOcml_VOeNszCNKr1hPC53MJujji_IOJ7RIItQHogXqyYSz7pvKCUFmMcEJWw/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsheqbKDYDDHVP_cg__P1QmqsPyHSWquklMCBUoYbeDionsjgynmFlxoaO3dItzjQRwg/exec";
 
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -41,16 +41,16 @@ document.getElementById('loginForm').addEventListener('submit', async function (
         const data = await response.json();
 
         // 4. Logika Berhasil/Gagal
-        if (data.status === "success") {
-            // Simpan sesi
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('namaTutor', data.nama);
+        if (data.token) {
+            // Simpan data sesi di browser
+            sessionStorage.setItem('authToken', data.token);
+            sessionStorage.setItem('namaTutor', data.nama);
 
             // Redirect ke dashboard admin
             window.location.href = 'admin.html';
         } else {
-            // Pesan kesalahan dari Apps Script (Username/Password salah)
-            alert("Gagal: " + (data.message || "Username/Password salah"));
+            // Jika status error dari Apps Script (Username/Password salah)
+            alert("Gagal: " + (data.error || "Username atau Password salah!"));
             resetButton(btn);
         }
 

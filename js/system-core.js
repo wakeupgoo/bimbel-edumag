@@ -1,5 +1,5 @@
 // URL Backend Apps Script Anda
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIgfVuymOcml_VOeNszCNKr1hPC53MJujji_IOJ7RIItQHogXqyYSz7pvKCUFmMcEJWw/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsheqbKDYDDHVP_cg__P1QmqsPyHSWquklMCBUoYbeDionsjgynmFlxoaO3dItzjQRwg/exec";
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
@@ -49,18 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await response.json();
 
-                if (data.status === "success") {
+                if (data.token) {
                     // Simpan data sesi di browser
-                    localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('namaTutor', data.nama);
-                    localStorage.setItem('loginTime', new Date().getTime());
+                    sessionStorage.setItem('authToken', data.token);
+                    sessionStorage.setItem('namaTutor', data.nama);
 
                     // Pengalihan ke halaman admin
                     // (Sesuai instruksi Anda tentang masterkey jika diperlukan)
                     window.location.href = 'admin.html';
                 } else {
                     // Jika status error dari Apps Script (Username/Password salah)
-                    showError(data.message || "Username atau Password salah!");
+                    showError(data.error || "Username atau Password salah!");
                 }
 
             } catch (err) {

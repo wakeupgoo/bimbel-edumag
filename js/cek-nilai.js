@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIgfVuymOcml_VOeNszCNKr1hPC53MJujji_IOJ7RIItQHogXqyYSz7pvKCUFmMcEJWw/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsheqbKDYDDHVP_cg__P1QmqsPyHSWquklMCBUoYbeDionsjgynmFlxoaO3dItzjQRwg/exec";
 
 async function cariNilai() {
     try {

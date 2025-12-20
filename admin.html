@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - TutorPanel</title>
 
-    <script>
-        if (localStorage.getItem('isLoggedIn') !== 'true') {
-            window.location.replace('bimbeledumagmasterkey2023.html');
-        }
-    </script>
+    <script>(function(){if(!sessionStorage.getItem('authToken'))window.location.replace('index.html');})();</script>
 
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
