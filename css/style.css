@@ -1378,3 +1378,32 @@ section {
     /* Memastikan gambar mengisi area tanpa terdistorsi */
     border-radius: var(--radius-default);
 }
+
+
+
+/* --- Social Section --- */
+.social-section {
+    background-color: var(--color-light);
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.social-cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: var(--color-white);
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all var(--transition-speed);
+}
+
+.btn-instagram:hover {
+    background: linear-gradient(45deg, #bc1888 0%, #cc2366 25%, #dc2743 50%, #e6683c 75%, #f09433 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
