@@ -83,8 +83,8 @@ async function cariNilai() {
             // --- 3. GENERATE PROGRESS CARDS ---
             data.history.forEach(row => {
                 try {
-                    // Gunakan 'timestamp' sesuai output JSON backend Anda
-                    const waktu = row.timestamp || row.tanggal || "-";
+                    // Flexible Date Selection: Use a fallback mechanism to catch the date
+                    const waktu = row.timestamp || row.tanggal || row.date || row.waktu || '-';
                     const score = parseFloat(row.nilai) || 0;
                     const materi = row.materi || "-";
                     const catatan = row.catatan || "-";
