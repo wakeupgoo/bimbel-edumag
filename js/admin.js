@@ -3,7 +3,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsheqbKDYDDHVP_cg__
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Proteksi Halaman
     if (!sessionStorage.getItem('authToken')) {
-        window.location.replace('login.html');
+        window.location.replace('bimbeledumagmasterkey2023.html');
         return;
     }
 
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function logout() {
     if (confirm("Apakah Anda yakin ingin keluar dari aplikasi?")) {
         sessionStorage.clear();
-        window.location.replace('login.html');
+        window.location.replace('bimbeledumagmasterkey2023.html');
     }
 }
 
@@ -46,7 +46,7 @@ async function loadStudentsFromSheets() {
             if (data.message.includes('Token tidak valid')) {
                 alert("Sesi login telah berakhir. Silakan login kembali.");
                 sessionStorage.clear();
-                window.location.replace('login.html');
+                window.location.replace('bimbeledumagmasterkey2023.html');
                 return;
             }
             tableBody.innerHTML = `<tr><td colspan="5">❌ Error: ${data.message}</td></tr>`;
